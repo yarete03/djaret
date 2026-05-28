@@ -1,4 +1,4 @@
-name: Django CI
+name: Django CI-CD
 on:
   push:
     branches: [ master ]
@@ -55,14 +55,14 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t $ECR_REGISTRY/djaret-ecr-pro/django:$SHORT_SHA .
+          docker build -t $ECR_REGISTRY/djaret-ecr-pro/djaret:$SHORT_SHA .
 
       - name: Push image to ECR
         run: |
-          docker push $ECR_REGISTRY/djaret-ecr-pro/django:$SHORT_SHA
+          docker push $ECR_REGISTRY/djaret-ecr-pro/djaret:$SHORT_SHA
 
       - name: Update Lambda image
         run: |
           aws lambda update-function-code \
             --function-name djaret-lambda-pro \
-            --image-uri $ECR_REGISTRY/$ECR_REPOSITORY/django:$SHORT_SHA
+            --image-uri $ECR_REGISTRY/$ECR_REPOSITORY/djaret:$SHORT_SHA
