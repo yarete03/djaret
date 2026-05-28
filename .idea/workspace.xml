@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Adding connection string to settings">
+    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Updating Dockerfile to install build-essential">
+      <change afterPath="$PROJECT_DIR$/djaret_app/management/commands/ensure_admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djaret/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djaret/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +24,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="GitHub Workflow" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -40,61 +40,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0058392548774802" />
-      <entry key="MS500" value="1.3574962465904226" />
-      <entry key="S2" value="1.773246337455317" />
-      <entry key="S5" value="1.9022505360692659" />
-      <entry key="S10" value="1.9498911569906545" />
-      <entry key="S30" value="2.027734503390601" />
-      <entry key="S60" value="2.2907031499579835" />
-      <entry key="M2" value="2.8996205459162536" />
-      <entry key="M5" value="12.669816954366818" />
-      <entry key="M10" value="65.07601879384059" />
-      <entry key="M15" value="132.105236479815" />
-      <entry key="M30" value="298.0445643018422" />
-      <entry key="H1" value="528.1937181135143" />
-      <entry key="H2" value="846.0734634942463" />
-      <entry key="H4" value="1175.456264987961" />
-      <entry key="D1" value="1640.87348465988" />
-      <entry key="W1" value="1747.3155841817047" />
+      <entry key="MS100" value="1.414358850621323" />
+      <entry key="MS500" value="2.455252613461438" />
+      <entry key="S2" value="2.9480732474929785" />
+      <entry key="S5" value="3.3372894938920945" />
+      <entry key="S10" value="3.6032965623222526" />
+      <entry key="S30" value="4.3225160467899" />
+      <entry key="S60" value="6.981206656530636" />
+      <entry key="M2" value="13.176299503038077" />
+      <entry key="M5" value="22.931994093930832" />
+      <entry key="M10" value="32.156883530093054" />
+      <entry key="M15" value="49.59909024155406" />
+      <entry key="M30" value="145.11879605317185" />
+      <entry key="H1" value="359.7202948524275" />
+      <entry key="H2" value="702.4880373038534" />
+      <entry key="H4" value="1085.4054987477762" />
+      <entry key="D1" value="1662.7203008432818" />
+      <entry key="W1" value="1799.7688455590592" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
-      <entry key="S10" value="5.917396675841822E-303" />
-      <entry key="S30" value="2.8643428771347865E-101" />
-      <entry key="S60" value="7.56653589078238E-51" />
-      <entry key="M2" value="1.230073119429988E-25" />
-      <entry key="M5" value="1.6465789285321403E-10" />
-      <entry key="M10" value="1.8150982005257856E-5" />
-      <entry key="M15" value="8.736672410089383E-4" />
-      <entry key="M30" value="0.04500359384784317" />
-      <entry key="H1" value="0.38814970530095244" />
-      <entry key="H2" value="1.3058469537418738" />
-      <entry key="H4" value="2.5125084020151784" />
-      <entry key="D1" value="4.447901245420145" />
-      <entry key="W1" value="4.916845549903734" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="9.813883813273457E-129" />
+      <entry key="S60" value="1.4005707443482684E-64" />
+      <entry key="M2" value="1.6735354064786262E-32" />
+      <entry key="M5" value="2.951645144928253E-13" />
+      <entry key="M10" value="7.684947795110923E-7" />
+      <entry key="M15" value="1.0613042792237833E-4" />
+      <entry key="M30" value="0.015685346910742467" />
+      <entry key="H1" value="0.22915151173049997" />
+      <entry key="H2" value="1.0033535999573029" />
+      <entry key="H4" value="2.2023603984069933" />
+      <entry key="D1" value="4.3512958648445075" />
+      <entry key="W1" value="4.901445815190994" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9781031648589668" />
-      <entry key="MS500" value="1.3470446587943117" />
-      <entry key="S2" value="1.7691857744594366" />
-      <entry key="S5" value="1.9004462537885842" />
-      <entry key="S10" value="1.9489557589527322" />
-      <entry key="S30" value="2.0274103603598763" />
-      <entry key="S60" value="2.290526885872554" />
-      <entry key="M2" value="2.8995169455086365" />
-      <entry key="M5" value="12.669659772730357" />
-      <entry key="M10" value="65.07553592640728" />
-      <entry key="M15" value="132.10537347383834" />
-      <entry key="M30" value="298.0885768743979" />
-      <entry key="H1" value="528.5805747324646" />
-      <entry key="H2" value="847.3778720709546" />
-      <entry key="H4" value="1177.967595958505" />
-      <entry key="D1" value="1645.3210769965774" />
-      <entry key="W1" value="1752.2323818614739" />
+      <entry key="MS100" value="1.3534649374489502" />
+      <entry key="MS500" value="2.4320406776291934" />
+      <entry key="S2" value="2.9409662797049787" />
+      <entry key="S5" value="3.3340585581281146" />
+      <entry key="S10" value="3.6015503492991034" />
+      <entry key="S30" value="4.321834950769763" />
+      <entry key="S60" value="6.980709589499579" />
+      <entry key="M2" value="13.17587033370312" />
+      <entry key="M5" value="22.93170595630794" />
+      <entry key="M10" value="32.15667575780823" />
+      <entry key="M15" value="49.598962463766554" />
+      <entry key="M30" value="145.13404609122674" />
+      <entry key="H1" value="359.9486306440639" />
+      <entry key="H2" value="703.4902571181785" />
+      <entry key="H4" value="1087.6068120512675" />
+      <entry key="D1" value="1667.0712918999118" />
+      <entry key="W1" value="1804.6702432785999" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -256,7 +256,7 @@
       <workItem from="1779925702282" duration="1546000" />
       <workItem from="1779927268072" duration="40000" />
       <workItem from="1779927317376" duration="6720000" />
-      <workItem from="1779994128354" duration="2805000" />
+      <workItem from="1779994128354" duration="6203000" />
     </task>
     <task id="LOCAL-00001" summary="Push">
       <option name="closed" value="true" />
@@ -346,7 +346,31 @@
       <option name="project" value="LOCAL" />
       <updated>1779934467003</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Adding iam connection config">
+      <option name="closed" value="true" />
+      <created>1779996957941</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1779996957941</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Adding the code that wasn't added before">
+      <option name="closed" value="true" />
+      <created>1779997136058</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1779997136058</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Updating Dockerfile to install build-essential">
+      <option name="closed" value="true" />
+      <created>1779997278460</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1779997278460</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,7 +390,10 @@
     <MESSAGE value="Removing unnecessary cache control headers from s3 content" />
     <MESSAGE value="Adding MariaDB connection string" />
     <MESSAGE value="Adding connection string to settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding connection string to settings" />
+    <MESSAGE value="Adding iam connection config" />
+    <MESSAGE value="Adding the code that wasn't added before" />
+    <MESSAGE value="Updating Dockerfile to install build-essential" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updating Dockerfile to install build-essential" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/djaret$manage.coverage" NAME="manage Coverage Results" MODIFIED="1779841029555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
