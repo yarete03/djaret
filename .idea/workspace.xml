@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Editing ecr repository name and tag" />
+    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Removing unnecessary cache control headers from s3 content">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,61 +38,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0001411972880743" />
-      <entry key="MS500" value="1.1699176705872179" />
-      <entry key="S2" value="1.800940315633474" />
-      <entry key="S5" value="2.5594362852237236" />
-      <entry key="S10" value="3.137411660370933" />
-      <entry key="S30" value="4.485028757794823" />
-      <entry key="S60" value="7.277885377889109" />
-      <entry key="M2" value="11.719556870454642" />
-      <entry key="M5" value="18.438358334809077" />
-      <entry key="M10" value="29.37556334901655" />
-      <entry key="M15" value="43.32374782088774" />
-      <entry key="M30" value="111.78252560407941" />
-      <entry key="H1" value="289.8716136615585" />
-      <entry key="H2" value="537.9970650967683" />
-      <entry key="H4" value="756.462030862757" />
-      <entry key="D1" value="1019.6369974993477" />
-      <entry key="W1" value="1074.5302916970536" />
+      <entry key="MS100" value="2.419734966425355" />
+      <entry key="MS500" value="3.70286750762809" />
+      <entry key="S2" value="6.3004438103278515" />
+      <entry key="S5" value="8.114533203009543" />
+      <entry key="S10" value="9.327336699855318" />
+      <entry key="S30" value="14.561079265865642" />
+      <entry key="S60" value="19.463862602514517" />
+      <entry key="M2" value="23.85154027098847" />
+      <entry key="M5" value="32.29564072898235" />
+      <entry key="M10" value="45.467901472115" />
+      <entry key="M15" value="59.3009257605722" />
+      <entry key="M30" value="120.07519361352918" />
+      <entry key="H1" value="287.0137060651064" />
+      <entry key="H2" value="537.5932021021127" />
+      <entry key="H4" value="768.80555355813" />
+      <entry key="D1" value="1056.431546873779" />
+      <entry key="W1" value="1117.4429577836263" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
-      <entry key="S5" value="3.399980330765627E-245" />
-      <entry key="S10" value="8.1596401581017E-123" />
-      <entry key="S30" value="3.1881477887770443E-41" />
-      <entry key="S60" value="7.982773684300251E-21" />
-      <entry key="M2" value="1.2634535741567318E-10" />
-      <entry key="M5" value="1.6643087539784917E-4" />
-      <entry key="M10" value="0.018248442282908093" />
-      <entry key="M15" value="0.08767918408794732" />
-      <entry key="M30" value="0.45083997870010245" />
-      <entry key="H1" value="1.2285331303658371" />
-      <entry key="H2" value="2.3231972571778976" />
-      <entry key="H4" value="3.351231470755329" />
-      <entry key="D1" value="4.666643447294857" />
-      <entry key="W1" value="4.950682376256638" />
+      <entry key="S5" value="9.19796959854388E-298" />
+      <entry key="S10" value="4.244033362888422E-149" />
+      <entry key="S30" value="5.523839348941605E-50" />
+      <entry key="S60" value="3.322806979898209E-25" />
+      <entry key="M2" value="8.151451274083681E-13" />
+      <entry key="M5" value="2.2136255401492127E-5" />
+      <entry key="M10" value="0.0066551971911230174" />
+      <entry key="M15" value="0.04475620484487708" />
+      <entry key="M30" value="0.32210747036736237" />
+      <entry key="H1" value="1.0384272138197523" />
+      <entry key="H2" value="2.1358988426871512" />
+      <entry key="H4" value="3.2133033205322903" />
+      <entry key="D1" value="4.634069073682193" />
+      <entry key="W1" value="4.945730823942732" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9795576338277335" />
-      <entry key="MS500" value="1.1648276416604202" />
-      <entry key="S2" value="1.7987155378192976" />
-      <entry key="S5" value="2.55801060728694" />
-      <entry key="S10" value="3.1364825602664035" />
-      <entry key="S30" value="4.484554102260806" />
-      <entry key="S60" value="7.2775027121210005" />
-      <entry key="M2" value="11.71925386998892" />
-      <entry key="M5" value="18.438318163166848" />
-      <entry key="M10" value="29.39349177455857" />
-      <entry key="M15" value="43.410820729127174" />
-      <entry key="M30" value="112.23192266341617" />
-      <entry key="H1" value="291.0981386606339" />
-      <entry key="H2" value="540.3184384060463" />
-      <entry key="H4" value="759.8120009979828" />
-      <entry key="D1" value="1024.3033614960932" />
-      <entry key="W1" value="1079.4809320981783" />
+      <entry key="MS100" value="2.360122041161335" />
+      <entry key="MS500" value="3.684614208249934" />
+      <entry key="S2" value="6.292077487526504" />
+      <entry key="S5" value="8.110109522348536" />
+      <entry key="S10" value="9.324749249568054" />
+      <entry key="S30" value="14.559634437158023" />
+      <entry key="S60" value="19.46286438658873" />
+      <entry key="M2" value="23.850920016088303" />
+      <entry key="M5" value="32.29532677091634" />
+      <entry key="M10" value="45.47426187031593" />
+      <entry key="M15" value="59.34524592724515" />
+      <entry key="M30" value="120.39620200601766" />
+      <entry key="H1" value="288.0504003578621" />
+      <entry key="H2" value="539.7274058841508" />
+      <entry key="H4" value="772.0176382726938" />
+      <entry key="D1" value="1061.0653369021886" />
+      <entry key="W1" value="1122.3886464532873" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -102,30 +104,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Django Server.djaret.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.manage.executor&quot;: &quot;Run&quot;,
-    &quot;Python.settings.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Django Server.djaret.executor": "Run",
+    "Docker.Dockerfile.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.manage.executor": "Run",
+    "Python.settings.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Docker.Dockerfile">
     <configuration name="manage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="djaret" />
@@ -251,7 +253,7 @@
       <workItem from="1779925635273" duration="54000" />
       <workItem from="1779925702282" duration="1546000" />
       <workItem from="1779927268072" duration="40000" />
-      <workItem from="1779927317376" duration="3412000" />
+      <workItem from="1779927317376" duration="5067000" />
     </task>
     <task id="LOCAL-00001" summary="Push">
       <option name="closed" value="true" />
@@ -309,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779931034031</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Removing unnecessary cache control headers from s3 content">
+      <option name="closed" value="true" />
+      <created>1779931270403</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1779931270403</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,7 +336,8 @@
     <MESSAGE value="Editing lambda name" />
     <MESSAGE value="Editing image name and tag" />
     <MESSAGE value="Editing ecr repository name and tag" />
-    <option name="LAST_COMMIT_MESSAGE" value="Editing ecr repository name and tag" />
+    <MESSAGE value="Removing unnecessary cache control headers from s3 content" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removing unnecessary cache control headers from s3 content" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/djaret$manage.coverage" NAME="manage Coverage Results" MODIFIED="1779841029555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

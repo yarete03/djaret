@@ -75,8 +75,15 @@ WSGI_APPLICATION = 'djaret.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'djaret_db',
+        'USER': 'djaret_user',
+        'PASSWORD': 'your_password',
+        'HOST': 'your-mariadb-host',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
