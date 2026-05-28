@@ -7,7 +7,7 @@ on:
 
 env:
   AWS_REGION: eu-west-1
-  ECR_REPOSITORY: djaret
+  ECR_REPOSITORY: djaret-ecr-pro
   ECR_REGISTRY: 884916644426.dkr.ecr.eu-west-1.amazonaws.com
   S3_BUCKET: djaret-s3-pro
 
@@ -55,11 +55,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t $ECR_REGISTRY/djaret-ecr-pro/djaret:$SHORT_SHA .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/djaret:$SHORT_SHA .
 
       - name: Push image to ECR
         run: |
-          docker push $ECR_REGISTRY/djaret-ecr-pro/djaret:$SHORT_SHA
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY/djaret:$SHORT_SHA
 
       - name: Update Lambda image
         run: |
