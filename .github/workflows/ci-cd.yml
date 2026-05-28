@@ -17,16 +17,18 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Set up Docker DinD
-        uses: docker/setup-buildx-action@v3
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::884916644426:role/github-actions-role
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
-        id: ecr-login
         run: |
-          aws ecr get-login-password \
-            --region eu-west-1 | docker login \
-            --username AWS \
-            --password-stdin $ECR_REGISTRY
+          aws ecr get-login-password --region $AWS_REGION \
+            | docker login \
+              --username AWS \
+              --password-stdin $ECR_REGISTRY
 
       - name: Generate image tag
         id: vars

@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Push" />
+    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Push">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/ci-cd.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci-cd.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -215,10 +218,10 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.manage" />
-      <item itemvalue="Python.settings" />
       <item itemvalue="Django Server.djaret" />
       <item itemvalue="Docker.Dockerfile" />
+      <item itemvalue="Python.manage" />
+      <item itemvalue="Python.settings" />
     </list>
     <recent_temporary>
       <list>
@@ -251,7 +254,7 @@
       <workItem from="1779925635273" duration="54000" />
       <workItem from="1779925702282" duration="1546000" />
       <workItem from="1779927268072" duration="40000" />
-      <workItem from="1779927317376" duration="34000" />
+      <workItem from="1779927317376" duration="907000" />
     </task>
     <task id="LOCAL-00001" summary="Push">
       <option name="closed" value="true" />
