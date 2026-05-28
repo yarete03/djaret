@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Removing unnecessary cache control headers from s3 content">
+    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Adding MariaDB connection string">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djaret/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djaret/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,61 +40,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="2.419734966425355" />
-      <entry key="MS500" value="3.70286750762809" />
-      <entry key="S2" value="6.3004438103278515" />
-      <entry key="S5" value="8.114533203009543" />
-      <entry key="S10" value="9.327336699855318" />
-      <entry key="S30" value="14.561079265865642" />
-      <entry key="S60" value="19.463862602514517" />
-      <entry key="M2" value="23.85154027098847" />
-      <entry key="M5" value="32.29564072898235" />
-      <entry key="M10" value="45.467901472115" />
-      <entry key="M15" value="59.3009257605722" />
-      <entry key="M30" value="120.07519361352918" />
-      <entry key="H1" value="287.0137060651064" />
-      <entry key="H2" value="537.5932021021127" />
-      <entry key="H4" value="768.80555355813" />
-      <entry key="D1" value="1056.431546873779" />
-      <entry key="W1" value="1117.4429577836263" />
+      <entry key="MS100" value="1.7684375906440062" />
+      <entry key="MS500" value="1.9486843151404538" />
+      <entry key="S2" value="1.9869165458858418" />
+      <entry key="S5" value="1.9947459325778691" />
+      <entry key="S10" value="1.9973695065458448" />
+      <entry key="S30" value="2.000103025028491" />
+      <entry key="S60" value="2.123288078218035" />
+      <entry key="M2" value="3.408728048303699" />
+      <entry key="M5" value="9.233139120275833" />
+      <entry key="M10" value="20.572966597337075" />
+      <entry key="M15" value="33.32006496083123" />
+      <entry key="M30" value="84.91150088367614" />
+      <entry key="H1" value="234.811874074343" />
+      <entry key="H2" value="485.95065585033063" />
+      <entry key="H4" value="735.4478184478291" />
+      <entry key="D1" value="1062.3521354586828" />
+      <entry key="W1" value="1133.609175593847" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
-      <entry key="S5" value="9.19796959854388E-298" />
-      <entry key="S10" value="4.244033362888422E-149" />
-      <entry key="S30" value="5.523839348941605E-50" />
-      <entry key="S60" value="3.322806979898209E-25" />
-      <entry key="M2" value="8.151451274083681E-13" />
-      <entry key="M5" value="2.2136255401492127E-5" />
-      <entry key="M10" value="0.0066551971911230174" />
-      <entry key="M15" value="0.04475620484487708" />
-      <entry key="M30" value="0.32210747036736237" />
-      <entry key="H1" value="1.0384272138197523" />
-      <entry key="H2" value="2.1358988426871512" />
-      <entry key="H4" value="3.2133033205322903" />
-      <entry key="D1" value="4.634069073682193" />
-      <entry key="W1" value="4.945730823942732" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="4.6817376016044994E-192" />
+      <entry key="S30" value="2.649214556389165E-64" />
+      <entry key="S60" value="2.3011406305716705E-32" />
+      <entry key="M2" value="2.1451316970443517E-16" />
+      <entry key="M5" value="8.188262676937707E-7" />
+      <entry key="M10" value="0.0012799845650566344" />
+      <entry key="M15" value="0.014912454194179506" />
+      <entry key="M30" value="0.18592968437144214" />
+      <entry key="H1" value="0.7889509955041809" />
+      <entry key="H2" value="1.8617341457588064" />
+      <entry key="H4" value="2.999992815658934" />
+      <entry key="D1" value="4.581319547415569" />
+      <entry key="W1" value="4.937648858385932" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="2.360122041161335" />
-      <entry key="MS500" value="3.684614208249934" />
-      <entry key="S2" value="6.292077487526504" />
-      <entry key="S5" value="8.110109522348536" />
-      <entry key="S10" value="9.324749249568054" />
-      <entry key="S30" value="14.559634437158023" />
-      <entry key="S60" value="19.46286438658873" />
-      <entry key="M2" value="23.850920016088303" />
-      <entry key="M5" value="32.29532677091634" />
-      <entry key="M10" value="45.47426187031593" />
-      <entry key="M15" value="59.34524592724515" />
-      <entry key="M30" value="120.39620200601766" />
-      <entry key="H1" value="288.0504003578621" />
-      <entry key="H2" value="539.7274058841508" />
-      <entry key="H4" value="772.0176382726938" />
-      <entry key="D1" value="1061.0653369021886" />
-      <entry key="W1" value="1122.3886464532873" />
+      <entry key="MS100" value="1.1708296100030404" />
+      <entry key="MS500" value="1.7699036532422743" />
+      <entry key="S2" value="1.9383846190496656" />
+      <entry key="S5" value="1.9750056518956285" />
+      <entry key="S10" value="1.9874439797597987" />
+      <entry key="S30" value="1.9967820350805885" />
+      <entry key="S60" value="2.1216198247273823" />
+      <entry key="M2" value="3.407860792651354" />
+      <entry key="M5" value="9.232733116596387" />
+      <entry key="M10" value="20.573973229772214" />
+      <entry key="M15" value="33.33468175738798" />
+      <entry key="M30" value="85.09671746851505" />
+      <entry key="H1" value="235.59946814686927" />
+      <entry key="H2" value="487.8108920887955" />
+      <entry key="H4" value="738.4466632727772" />
+      <entry key="D1" value="1066.9331774142793" />
+      <entry key="W1" value="1138.54678212047" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -253,7 +255,7 @@
       <workItem from="1779925635273" duration="54000" />
       <workItem from="1779925702282" duration="1546000" />
       <workItem from="1779927268072" duration="40000" />
-      <workItem from="1779927317376" duration="5067000" />
+      <workItem from="1779927317376" duration="6283000" />
     </task>
     <task id="LOCAL-00001" summary="Push">
       <option name="closed" value="true" />
@@ -319,7 +321,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779931270403</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Adding MariaDB connection string">
+      <option name="closed" value="true" />
+      <created>1779933189292</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1779933189292</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -337,7 +347,8 @@
     <MESSAGE value="Editing image name and tag" />
     <MESSAGE value="Editing ecr repository name and tag" />
     <MESSAGE value="Removing unnecessary cache control headers from s3 content" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removing unnecessary cache control headers from s3 content" />
+    <MESSAGE value="Adding MariaDB connection string" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding MariaDB connection string" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/djaret$manage.coverage" NAME="manage Coverage Results" MODIFIED="1779841029555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
