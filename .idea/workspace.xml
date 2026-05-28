@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Adding cicd">
-      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci-cd.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci-cd.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Adding cicd and updating workflow" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,61 +36,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.6059876431039135" />
-      <entry key="MS500" value="3.826415625738703" />
-      <entry key="S2" value="8.69597817017834" />
-      <entry key="S5" value="15.29280842712073" />
-      <entry key="S10" value="20.379334360579364" />
-      <entry key="S30" value="25.630186722829336" />
-      <entry key="S60" value="27.648462064117684" />
-      <entry key="M2" value="29.453622762597814" />
-      <entry key="M5" value="32.78830388798985" />
-      <entry key="M10" value="42.08132631588263" />
-      <entry key="M15" value="59.51338161688792" />
-      <entry key="M30" value="153.1369217819534" />
-      <entry key="H1" value="353.3823579259312" />
-      <entry key="H2" value="588.4332485709737" />
-      <entry key="H4" value="775.556228307151" />
-      <entry key="D1" value="986.2923884421836" />
-      <entry key="W1" value="1028.7256586584217" />
+      <entry key="MS100" value="1.0053732102271085" />
+      <entry key="MS500" value="1.3515982999782798" />
+      <entry key="S2" value="1.7700371745547112" />
+      <entry key="S5" value="1.9011055463506126" />
+      <entry key="S10" value="1.986547061281776" />
+      <entry key="S30" value="2.8818577009505635" />
+      <entry key="S60" value="5.129837793275773" />
+      <entry key="M2" value="11.09989336930996" />
+      <entry key="M5" value="23.220153248175478" />
+      <entry key="M10" value="36.70411309227197" />
+      <entry key="M15" value="54.34531553148879" />
+      <entry key="M30" value="144.20921587665546" />
+      <entry key="H1" value="341.7902008122329" />
+      <entry key="H2" value="579.6177669381578" />
+      <entry key="H4" value="771.7348962551572" />
+      <entry key="D1" value="990.2002658225971" />
+      <entry key="W1" value="1034.413655601441" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
-      <entry key="S5" value="2.4801647583961777E-135" />
-      <entry key="S10" value="6.969041816988908E-68" />
-      <entry key="S30" value="6.516871132255148E-23" />
-      <entry key="S60" value="1.141311414966475E-11" />
-      <entry key="M2" value="4.777321403852245E-6" />
-      <entry key="M5" value="0.011279347226290683" />
-      <entry key="M10" value="0.15022798173563384" />
-      <entry key="M15" value="0.3574756978920385" />
-      <entry key="M30" value="0.9103270169872536" />
-      <entry key="H1" value="1.7457191600160662" />
-      <entry key="H2" value="2.7693627042575977" />
-      <entry key="H4" value="3.658906420369934" />
-      <entry key="D1" value="4.735462838345699" />
-      <entry key="W1" value="4.961046787897931" />
+      <entry key="S5" value="2.9878039387562288E-151" />
+      <entry key="S10" value="7.649073817614569E-76" />
+      <entry key="S30" value="1.448275087900105E-25" />
+      <entry key="S60" value="5.380345000409845E-13" />
+      <entry key="M2" value="1.0372595501239146E-6" />
+      <entry key="M5" value="0.006123012682948894" />
+      <entry key="M10" value="0.11068567784192734" />
+      <entry key="M15" value="0.291613026525982" />
+      <entry key="M30" value="0.8222002998821452" />
+      <entry key="H1" value="1.6590691122025185" />
+      <entry key="H2" value="2.6997583237766976" />
+      <entry key="H4" value="3.612632852826568" />
+      <entry key="D1" value="4.725428398621326" />
+      <entry key="W1" value="4.959543643444985" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.5695804160303786" />
-      <entry key="MS500" value="3.8057992563850798" />
-      <entry key="S2" value="8.681491644360275" />
-      <entry key="S5" value="15.281000333261671" />
-      <entry key="S10" value="20.371080954294786" />
-      <entry key="S30" value="25.626628197377247" />
-      <entry key="S60" value="27.646511445126862" />
-      <entry key="M2" value="29.45255343881191" />
-      <entry key="M5" value="32.7988907005816" />
-      <entry key="M10" value="42.23028291088215" />
-      <entry key="M15" value="59.86899600138814" />
-      <entry key="M30" value="154.04455689309617" />
-      <entry key="H1" value="355.1253205682839" />
-      <entry key="H2" value="591.2004826913137" />
-      <entry key="H4" value="779.213779765189" />
-      <entry key="D1" value="991.027571319557" />
-      <entry key="W1" value="1033.6866638970914" />
+      <entry key="MS100" value="0.9778451263736" />
+      <entry key="MS500" value="1.343639801790064" />
+      <entry key="S2" value="1.7673186233884244" />
+      <entry key="S5" value="1.89992441416477" />
+      <entry key="S10" value="1.985793378984822" />
+      <entry key="S30" value="2.880491182679997" />
+      <entry key="S60" value="5.128373240426015" />
+      <entry key="M2" value="11.09866755832626" />
+      <entry key="M5" value="23.22540211214255" />
+      <entry key="M10" value="36.81359330404911" />
+      <entry key="M15" value="54.635226432195" />
+      <entry key="M30" value="145.02889063482618" />
+      <entry key="H1" value="343.446602510341" />
+      <entry key="H2" value="582.315426166255" />
+      <entry key="H4" value="775.3461792379755" />
+      <entry key="D1" value="994.9254128408913" />
+      <entry key="W1" value="1039.3731574206024" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -255,7 +251,7 @@
       <workItem from="1779925635273" duration="54000" />
       <workItem from="1779925702282" duration="1546000" />
       <workItem from="1779927268072" duration="40000" />
-      <workItem from="1779927317376" duration="1895000" />
+      <workItem from="1779927317376" duration="2226000" />
     </task>
     <task id="LOCAL-00001" summary="Push">
       <option name="closed" value="true" />
@@ -273,7 +269,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779928317013</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Adding cicd and updating workflow">
+      <option name="closed" value="true" />
+      <created>1779929476652</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1779929476652</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,7 +289,8 @@
     </ignored-roots>
     <MESSAGE value="Push" />
     <MESSAGE value="Adding cicd" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding cicd" />
+    <MESSAGE value="Adding cicd and updating workflow" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding cicd and updating workflow" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/djaret$manage.coverage" NAME="manage Coverage Results" MODIFIED="1779841029555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
