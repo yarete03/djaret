@@ -64,5 +64,5 @@ jobs:
       - name: Update Lambda image
         run: |
           aws lambda update-function-code \
-            --function-name YOUR_FUNCTION_NAME \
+            --function-name djaret-lambda-pro \
             --image-uri $ECR_REGISTRY/$ECR_REPOSITORY/django:$SHORT_SHA
