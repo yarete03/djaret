@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Removing forwarding proto">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci-cd.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci-cd.yml" afterDir="false" />
+    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Adding invalidation process">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djaret_app/management/commands/ensure_admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/djaret/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djaret/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,23 +40,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0042745847705499" />
-      <entry key="MS500" value="1.3358758564303241" />
-      <entry key="S2" value="1.7612804844157166" />
-      <entry key="S5" value="1.8966395243103458" />
-      <entry key="S10" value="1.9469361539496461" />
-      <entry key="S30" value="2.0476207518980134" />
-      <entry key="S60" value="2.4964518962440607" />
-      <entry key="M2" value="3.461889147010682" />
-      <entry key="M5" value="6.604228813850372" />
-      <entry key="M10" value="15.842838045907046" />
-      <entry key="M15" value="27.31781671655695" />
-      <entry key="M30" value="77.68952669139144" />
-      <entry key="H1" value="234.91120437131013" />
-      <entry key="H2" value="560.9586590381374" />
-      <entry key="H4" value="983.6207802699606" />
-      <entry key="D1" value="1695.6517630336668" />
-      <entry key="W1" value="1874.942573498841" />
+      <entry key="MS100" value="1.000017286436238" />
+      <entry key="MS500" value="1.111568371434122" />
+      <entry key="S2" value="1.5779433532773994" />
+      <entry key="S5" value="1.803071317562811" />
+      <entry key="S10" value="1.8963696123678502" />
+      <entry key="S30" value="2.1433139446533143" />
+      <entry key="S60" value="3.0147783270784885" />
+      <entry key="M2" value="5.166984385013978" />
+      <entry key="M5" value="10.875419023087566" />
+      <entry key="M10" value="20.43231594048526" />
+      <entry key="M15" value="31.44207300316748" />
+      <entry key="M30" value="78.9179597436142" />
+      <entry key="H1" value="230.17332859268856" />
+      <entry key="H2" value="552.6047196362391" />
+      <entry key="H4" value="977.9536526143419" />
+      <entry key="D1" value="1703.9744082920436" />
+      <entry key="W1" value="1888.044911639006" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -65,37 +64,37 @@
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
       <entry key="S10" value="0.0" />
-      <entry key="S30" value="4.7862542481841946E-166" />
-      <entry key="S60" value="3.093018209185158E-83" />
-      <entry key="M2" value="7.864545298095643E-42" />
-      <entry key="M5" value="5.4812502366893826E-17" />
-      <entry key="M10" value="1.0472458891558794E-8" />
-      <entry key="M15" value="6.054966486972097E-6" />
-      <entry key="M30" value="0.003746537143475298" />
-      <entry key="H1" value="0.11199294980615151" />
-      <entry key="H2" value="0.7014359034857798" />
-      <entry key="H4" value="1.8414306963559506" />
-      <entry key="D1" value="4.223408719446029" />
-      <entry key="W1" value="4.880602296847647" />
+      <entry key="S30" value="3.2070408902329467E-170" />
+      <entry key="S60" value="2.5318434168498972E-85" />
+      <entry key="M2" value="7.115424279001365E-43" />
+      <entry key="M5" value="2.0964789333172755E-17" />
+      <entry key="M10" value="6.476704769774594E-9" />
+      <entry key="M15" value="4.395234335937304E-6" />
+      <entry key="M30" value="0.0031920169447503884" />
+      <entry key="H1" value="0.10337327048596838" />
+      <entry key="H2" value="0.6739020510465521" />
+      <entry key="H4" value="1.8049275405542333" />
+      <entry key="D1" value="4.209338430634586" />
+      <entry key="W1" value="4.878276154985412" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9836069126749594" />
-      <entry key="MS500" value="1.330331641790986" />
-      <entry key="S2" value="1.7594501961720277" />
-      <entry key="S5" value="1.8958508981083124" />
-      <entry key="S10" value="1.9465312939636767" />
-      <entry key="S30" value="2.0473816874486834" />
-      <entry key="S60" value="2.495932227065438" />
-      <entry key="M2" value="3.4611808927713272" />
-      <entry key="M5" value="6.603669851536596" />
-      <entry key="M10" value="15.842437230546578" />
-      <entry key="M15" value="27.317487613751453" />
-      <entry key="M30" value="77.69295714931143" />
-      <entry key="H1" value="235.02267140865686" />
-      <entry key="H2" value="561.6592317018295" />
-      <entry key="H4" value="985.461298139905" />
-      <entry key="D1" value="1699.8748693735602" />
-      <entry key="W1" value="1879.8231269638202" />
+      <entry key="MS100" value="2.0023619028200367E-5" />
+      <entry key="MS500" value="0.18151916418915942" />
+      <entry key="S2" value="1.091341296626359" />
+      <entry key="S5" value="1.568903521754346" />
+      <entry key="S10" value="1.7714725446365318" />
+      <entry key="S30" value="2.0997919174639446" />
+      <entry key="S60" value="2.9927225398668433" />
+      <entry key="M2" value="5.15578612352603" />
+      <entry key="M5" value="10.870706098001863" />
+      <entry key="M10" value="20.42980672343831" />
+      <entry key="M15" value="31.44032341913922" />
+      <entry key="M30" value="78.92012538636033" />
+      <entry key="H1" value="230.27583742235498" />
+      <entry key="H2" value="553.2776027083528" />
+      <entry key="H4" value="979.7575905805317" />
+      <entry key="D1" value="1708.1834295389597" />
+      <entry key="W1" value="1892.9231367264974" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -257,7 +256,7 @@
       <workItem from="1779925702282" duration="1546000" />
       <workItem from="1779927268072" duration="40000" />
       <workItem from="1779927317376" duration="6720000" />
-      <workItem from="1779994128354" duration="9214000" />
+      <workItem from="1779994128354" duration="9621000" />
     </task>
     <task id="LOCAL-00001" summary="Push">
       <option name="closed" value="true" />
@@ -387,7 +386,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780000611595</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Adding invalidation process">
+      <option name="closed" value="true" />
+      <created>1780003358907</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1780003358907</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -412,7 +419,8 @@
     <MESSAGE value="Updating Dockerfile to install build-essential" />
     <MESSAGE value="Adding allowed DNSs" />
     <MESSAGE value="Removing forwarding proto" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removing forwarding proto" />
+    <MESSAGE value="Adding invalidation process" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding invalidation process" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/djaret$manage.coverage" NAME="manage Coverage Results" MODIFIED="1779841029555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
