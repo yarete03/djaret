@@ -1,0 +1,43 @@
+name: Django CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  AWS_REGION: eu-west-1
+  ECR_REPOSITORY: djaret
+  ECR_REGISTRY: 884916644426.dkr.ecr.eu-west-1.amazonaws.com
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Docker DinD
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Amazon ECR
+        id: ecr-login
+        run: |
+          aws ecr get-login-password \
+            --region eu-west-1 | docker login \
+            --username AWS \
+            --password-stdin $ECR_REGISTRY
+
+      - name: Generate image tag
+        id: vars
+        run: |
+          SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+          echo "SHORT_SHA=$SHORT_SHA" >> $GITHUB_ENV
+
+      - name: Build Docker image
+        run: |
+          docker build -t $ECR_REGISTRY/djaret-ecr-pro/django:$SHORT_SHA .
+
+      - name: Push image to ECR
+        run: |
+          docker push $ECR_REGISTRY/djaret-ecr-pro/django:$SHORT_SHA
