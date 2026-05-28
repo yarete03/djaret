@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Adding invalidation process">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djaret/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djaret/settings.py" afterDir="false" />
-    </list>
+    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Removing debug mode" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,23 +37,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.000017286436238" />
-      <entry key="MS500" value="1.111568371434122" />
-      <entry key="S2" value="1.5779433532773994" />
-      <entry key="S5" value="1.803071317562811" />
-      <entry key="S10" value="1.8963696123678502" />
-      <entry key="S30" value="2.1433139446533143" />
-      <entry key="S60" value="3.0147783270784885" />
-      <entry key="M2" value="5.166984385013978" />
-      <entry key="M5" value="10.875419023087566" />
-      <entry key="M10" value="20.43231594048526" />
-      <entry key="M15" value="31.44207300316748" />
-      <entry key="M30" value="78.9179597436142" />
-      <entry key="H1" value="230.17332859268856" />
-      <entry key="H2" value="552.6047196362391" />
-      <entry key="H4" value="977.9536526143419" />
-      <entry key="D1" value="1703.9744082920436" />
-      <entry key="W1" value="1888.044911639006" />
+      <entry key="MS100" value="1.0069224885202421" />
+      <entry key="MS500" value="1.6404666378266959" />
+      <entry key="S2" value="3.8983247859492973" />
+      <entry key="S5" value="6.412140539932338" />
+      <entry key="S10" value="8.35313937676523" />
+      <entry key="S30" value="10.610979830705123" />
+      <entry key="S60" value="12.050991222091872" />
+      <entry key="M2" value="14.473738428771194" />
+      <entry key="M5" value="20.37884981774282" />
+      <entry key="M10" value="30.001968223756293" />
+      <entry key="M15" value="41.0156642291813" />
+      <entry key="M30" value="88.40419334418107" />
+      <entry key="H1" value="239.43753000148814" />
+      <entry key="H2" value="561.7260999190707" />
+      <entry key="H4" value="987.177357680153" />
+      <entry key="D1" value="1713.7491352272946" />
+      <entry key="W1" value="1898.0092562351888" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -64,37 +61,37 @@
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
       <entry key="S10" value="0.0" />
-      <entry key="S30" value="3.2070408902329467E-170" />
-      <entry key="S60" value="2.5318434168498972E-85" />
-      <entry key="M2" value="7.115424279001365E-43" />
-      <entry key="M5" value="2.0964789333172755E-17" />
-      <entry key="M10" value="6.476704769774594E-9" />
-      <entry key="M15" value="4.395234335937304E-6" />
-      <entry key="M30" value="0.0031920169447503884" />
-      <entry key="H1" value="0.10337327048596838" />
-      <entry key="H2" value="0.6739020510465521" />
-      <entry key="H4" value="1.8049275405542333" />
-      <entry key="D1" value="4.209338430634586" />
-      <entry key="W1" value="4.878276154985412" />
+      <entry key="S30" value="2.1926508213926223E-170" />
+      <entry key="S60" value="2.0934824880118034E-85" />
+      <entry key="M2" value="6.470190177364063E-43" />
+      <entry key="M5" value="2.0182594776215427E-17" />
+      <entry key="M10" value="6.354733612121636E-9" />
+      <entry key="M15" value="4.339878130527828E-6" />
+      <entry key="M30" value="0.00317185216815822" />
+      <entry key="H1" value="0.10304623565858886" />
+      <entry key="H2" value="0.6728352180835728" />
+      <entry key="H4" value="1.8034983129175166" />
+      <entry key="D1" value="4.208782721464804" />
+      <entry key="W1" value="4.878184146764371" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="2.0023619028200367E-5" />
-      <entry key="MS500" value="0.18151916418915942" />
-      <entry key="S2" value="1.091341296626359" />
-      <entry key="S5" value="1.568903521754346" />
-      <entry key="S10" value="1.7714725446365318" />
-      <entry key="S30" value="2.0997919174639446" />
-      <entry key="S60" value="2.9927225398668433" />
-      <entry key="M2" value="5.15578612352603" />
-      <entry key="M5" value="10.870706098001863" />
-      <entry key="M10" value="20.42980672343831" />
-      <entry key="M15" value="31.44032341913922" />
-      <entry key="M30" value="78.92012538636033" />
-      <entry key="H1" value="230.27583742235498" />
-      <entry key="H2" value="553.2776027083528" />
-      <entry key="H4" value="979.7575905805317" />
-      <entry key="D1" value="1708.1834295389597" />
-      <entry key="W1" value="1892.9231367264974" />
+      <entry key="MS100" value="0.9398102393690472" />
+      <entry key="MS500" value="1.6228254705281646" />
+      <entry key="S2" value="3.888968954517885" />
+      <entry key="S5" value="6.383989904639508" />
+      <entry key="S10" value="8.310754798967496" />
+      <entry key="S30" value="10.580294753591454" />
+      <entry key="S60" value="12.032274029004283" />
+      <entry key="M2" value="14.463311486514229" />
+      <entry key="M5" value="20.374214063471562" />
+      <entry key="M10" value="29.99945675678994" />
+      <entry key="M15" value="41.0139036396604" />
+      <entry key="M30" value="88.40632876657901" />
+      <entry key="H1" value="239.53970625661302" />
+      <entry key="H2" value="562.3979136328993" />
+      <entry key="H4" value="988.9798651327823" />
+      <entry key="D1" value="1717.957600461954" />
+      <entry key="W1" value="1902.8873892661409" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -256,7 +253,7 @@
       <workItem from="1779925702282" duration="1546000" />
       <workItem from="1779927268072" duration="40000" />
       <workItem from="1779927317376" duration="6720000" />
-      <workItem from="1779994128354" duration="9621000" />
+      <workItem from="1779994128354" duration="10008000" />
     </task>
     <task id="LOCAL-00001" summary="Push">
       <option name="closed" value="true" />
@@ -394,7 +391,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780003358907</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Removing debug mode">
+      <option name="closed" value="true" />
+      <created>1780003772965</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1780003772965</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -420,7 +425,8 @@
     <MESSAGE value="Adding allowed DNSs" />
     <MESSAGE value="Removing forwarding proto" />
     <MESSAGE value="Adding invalidation process" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding invalidation process" />
+    <MESSAGE value="Removing debug mode" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removing debug mode" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/djaret$manage.coverage" NAME="manage Coverage Results" MODIFIED="1779841029555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

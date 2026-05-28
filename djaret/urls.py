@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from djaret_app.views import IndexView, HelloView
 
 urlpatterns = [
+    path('', IndexView.as_view(), name='index'),
+    path('api/hello/', HelloView.as_view(), name='hello'),
     path('admin/', admin.site.urls),
 ]
