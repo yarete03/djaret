@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Adding MariaDB connection string">
+    <list default="true" id="5ad0cbab-0c82-42df-97fa-57cb7d5c8cd9" name="Changes" comment="Adding connection string to settings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/djaret/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djaret/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +18,7 @@
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="23" />
+    <option name="cachedIndexableFilesCount" value="24" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -40,61 +40,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.7684375906440062" />
-      <entry key="MS500" value="1.9486843151404538" />
-      <entry key="S2" value="1.9869165458858418" />
-      <entry key="S5" value="1.9947459325778691" />
-      <entry key="S10" value="1.9973695065458448" />
-      <entry key="S30" value="2.000103025028491" />
-      <entry key="S60" value="2.123288078218035" />
-      <entry key="M2" value="3.408728048303699" />
-      <entry key="M5" value="9.233139120275833" />
-      <entry key="M10" value="20.572966597337075" />
-      <entry key="M15" value="33.32006496083123" />
-      <entry key="M30" value="84.91150088367614" />
-      <entry key="H1" value="234.811874074343" />
-      <entry key="H2" value="485.95065585033063" />
-      <entry key="H4" value="735.4478184478291" />
-      <entry key="D1" value="1062.3521354586828" />
-      <entry key="W1" value="1133.609175593847" />
+      <entry key="MS100" value="1.0058392548774802" />
+      <entry key="MS500" value="1.3574962465904226" />
+      <entry key="S2" value="1.773246337455317" />
+      <entry key="S5" value="1.9022505360692659" />
+      <entry key="S10" value="1.9498911569906545" />
+      <entry key="S30" value="2.027734503390601" />
+      <entry key="S60" value="2.2907031499579835" />
+      <entry key="M2" value="2.8996205459162536" />
+      <entry key="M5" value="12.669816954366818" />
+      <entry key="M10" value="65.07601879384059" />
+      <entry key="M15" value="132.105236479815" />
+      <entry key="M30" value="298.0445643018422" />
+      <entry key="H1" value="528.1937181135143" />
+      <entry key="H2" value="846.0734634942463" />
+      <entry key="H4" value="1175.456264987961" />
+      <entry key="D1" value="1640.87348465988" />
+      <entry key="W1" value="1747.3155841817047" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
-      <entry key="S10" value="4.6817376016044994E-192" />
-      <entry key="S30" value="2.649214556389165E-64" />
-      <entry key="S60" value="2.3011406305716705E-32" />
-      <entry key="M2" value="2.1451316970443517E-16" />
-      <entry key="M5" value="8.188262676937707E-7" />
-      <entry key="M10" value="0.0012799845650566344" />
-      <entry key="M15" value="0.014912454194179506" />
-      <entry key="M30" value="0.18592968437144214" />
-      <entry key="H1" value="0.7889509955041809" />
-      <entry key="H2" value="1.8617341457588064" />
-      <entry key="H4" value="2.999992815658934" />
-      <entry key="D1" value="4.581319547415569" />
-      <entry key="W1" value="4.937648858385932" />
+      <entry key="S10" value="5.917396675841822E-303" />
+      <entry key="S30" value="2.8643428771347865E-101" />
+      <entry key="S60" value="7.56653589078238E-51" />
+      <entry key="M2" value="1.230073119429988E-25" />
+      <entry key="M5" value="1.6465789285321403E-10" />
+      <entry key="M10" value="1.8150982005257856E-5" />
+      <entry key="M15" value="8.736672410089383E-4" />
+      <entry key="M30" value="0.04500359384784317" />
+      <entry key="H1" value="0.38814970530095244" />
+      <entry key="H2" value="1.3058469537418738" />
+      <entry key="H4" value="2.5125084020151784" />
+      <entry key="D1" value="4.447901245420145" />
+      <entry key="W1" value="4.916845549903734" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.1708296100030404" />
-      <entry key="MS500" value="1.7699036532422743" />
-      <entry key="S2" value="1.9383846190496656" />
-      <entry key="S5" value="1.9750056518956285" />
-      <entry key="S10" value="1.9874439797597987" />
-      <entry key="S30" value="1.9967820350805885" />
-      <entry key="S60" value="2.1216198247273823" />
-      <entry key="M2" value="3.407860792651354" />
-      <entry key="M5" value="9.232733116596387" />
-      <entry key="M10" value="20.573973229772214" />
-      <entry key="M15" value="33.33468175738798" />
-      <entry key="M30" value="85.09671746851505" />
-      <entry key="H1" value="235.59946814686927" />
-      <entry key="H2" value="487.8108920887955" />
-      <entry key="H4" value="738.4466632727772" />
-      <entry key="D1" value="1066.9331774142793" />
-      <entry key="W1" value="1138.54678212047" />
+      <entry key="MS100" value="0.9781031648589668" />
+      <entry key="MS500" value="1.3470446587943117" />
+      <entry key="S2" value="1.7691857744594366" />
+      <entry key="S5" value="1.9004462537885842" />
+      <entry key="S10" value="1.9489557589527322" />
+      <entry key="S30" value="2.0274103603598763" />
+      <entry key="S60" value="2.290526885872554" />
+      <entry key="M2" value="2.8995169455086365" />
+      <entry key="M5" value="12.669659772730357" />
+      <entry key="M10" value="65.07553592640728" />
+      <entry key="M15" value="132.10537347383834" />
+      <entry key="M30" value="298.0885768743979" />
+      <entry key="H1" value="528.5805747324646" />
+      <entry key="H2" value="847.3778720709546" />
+      <entry key="H4" value="1177.967595958505" />
+      <entry key="D1" value="1645.3210769965774" />
+      <entry key="W1" value="1752.2323818614739" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -126,7 +126,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "settings.editor.selected.configurable": "com.anthropic.code.plugin.settings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -255,7 +255,8 @@
       <workItem from="1779925635273" duration="54000" />
       <workItem from="1779925702282" duration="1546000" />
       <workItem from="1779927268072" duration="40000" />
-      <workItem from="1779927317376" duration="6283000" />
+      <workItem from="1779927317376" duration="6720000" />
+      <workItem from="1779994128354" duration="2805000" />
     </task>
     <task id="LOCAL-00001" summary="Push">
       <option name="closed" value="true" />
@@ -329,7 +330,23 @@
       <option name="project" value="LOCAL" />
       <updated>1779933189292</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Adding connection string to settings">
+      <option name="closed" value="true" />
+      <created>1779934284113</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1779934284113</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Adding connection string to settings">
+      <option name="closed" value="true" />
+      <created>1779934467003</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1779934467003</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,7 +365,8 @@
     <MESSAGE value="Editing ecr repository name and tag" />
     <MESSAGE value="Removing unnecessary cache control headers from s3 content" />
     <MESSAGE value="Adding MariaDB connection string" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding MariaDB connection string" />
+    <MESSAGE value="Adding connection string to settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding connection string to settings" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/djaret$manage.coverage" NAME="manage Coverage Results" MODIFIED="1779841029555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

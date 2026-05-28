@@ -10,6 +10,7 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 COPY manage.py .
+COPY rds-global-bundle-ca.pem .
 
 COPY djaret/ ./djaret/
 COPY djaret_app/ ./djaret_app/

@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
-import boto3
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,27 +74,22 @@ WSGI_APPLICATION = 'djaret.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-def get_token():
-    client = boto3.client("rds", region_name=os.environ["AWS_REGION"])
-    return client.generate_db_auth_token(
-        DBHostname=os.environ["DB_HOST"],
-        Port=3306,
-        DBUsername=os.environ["DB_USER"],
-        Region=os.environ["AWS_REGION"],
-    )
-
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.environ["DB_NAME"],
-        "USER": os.environ["DB_USER"],
-        "PASSWORD": get_token(),
-        "HOST": os.environ["DB_HOST"],
-        "PORT": "3306",
-        "CONN_MAX_AGE": 0,
+if os.environ.get("DB_HOST"):
+    DATABASES = {
+        "default": {
+            "ENGINE": "djaret.db_backends.iam_mysql",
+            "NAME": os.environ["DB_NAME"],
+            "USER": os.environ["DB_USER"],
+            "HOST": os.environ["DB_HOST"],
+            "PORT": "3306",
+            "CONN_MAX_AGE": 0,
+            "OPTIONS": {
+                "ssl": {"ca": str(BASE_DIR / "rds-global-bundle-ca.pem")},
+            },
+        }
     }
-}
+else:
+    DATABASES = {"default": {"ENGINE": "django.db.backends.dummy"}}
 
 
 # Password validation
