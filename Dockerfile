@@ -9,7 +9,10 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY . .
+COPY manage.py .
+
+COPY djaret/ ./djaret/
+COPY djaret_app/ ./djaret_app/
 
 ENV PORT=8000
 

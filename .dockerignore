@@ -1,0 +1,13 @@
+staticfiles/
+static/
+media/
+db.sqlite3
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+.envrc
+.git
+.gitignore

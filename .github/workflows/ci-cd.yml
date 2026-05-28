@@ -9,10 +9,14 @@ env:
   AWS_REGION: eu-west-1
   ECR_REPOSITORY: djaret
   ECR_REGISTRY: 884916644426.dkr.ecr.eu-west-1.amazonaws.com
+  S3_BUCKET: djaret-s3-pro
 
 jobs:
   CI:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -30,6 +34,19 @@ jobs:
               --username AWS \
               --password-stdin $ECR_REGISTRY
 
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Collect static files
+        run: |
+          python manage.py collectstatic --noinput
+
+      - name: Upload static files to S3
+        run: |
+          aws s3 sync staticfiles/ s3://$S3_BUCKET/static/ --delete \
+          --cache-control "public,max-age=31536000,immutable"
+
       - name: Generate image tag
         id: vars
         run: |
@@ -43,3 +60,9 @@ jobs:
       - name: Push image to ECR
         run: |
           docker push $ECR_REGISTRY/djaret-ecr-pro/django:$SHORT_SHA
+
+      - name: Update Lambda image
+        run: |
+          aws lambda update-function-code \
+            --function-name YOUR_FUNCTION_NAME \
+            --image-uri $ECR_REGISTRY/$ECR_REPOSITORY/django:$SHORT_SHA
