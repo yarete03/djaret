@@ -75,16 +75,25 @@ WSGI_APPLICATION = 'djaret.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+def get_token():
+    client = boto3.client("rds", region_name=os.environ["AWS_REGION"])
+    return client.generate_db_auth_token(
+        DBHostname=os.environ["DB_HOST"],
+        Port=3306,
+        DBUsername=os.environ["DB_USER"],
+        Region=os.environ["AWS_REGION"],
+    )
+
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": os.environ["DB_NAME"],
         "USER": os.environ["DB_USER"],
+        "PASSWORD": get_token(),
         "HOST": os.environ["DB_HOST"],
         "PORT": "3306",
-        "OPTIONS": {
-            "password": None,  # IMPORTANT: no static password
-        },
+        "CONN_MAX_AGE": 0,
     }
 }
 
