@@ -17,6 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from djaret_app.views import HelloView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/hello/', HelloView.as_view()),
 ]

@@ -42,21 +42,31 @@ jobs:
         run: |
           python manage.py collectstatic --noinput
 
-      - name: Upload static files to S3
-        run: |
-          aws s3 sync staticfiles/ s3://$S3_BUCKET/static/ --delete
-
-      - name: Purge CloudFront cache
-        run: |
-          aws cloudfront create-invalidation \
-          --distribution-id E373BG2H9HPN4J \
-          --paths "/static/*"
-
       - name: Generate image tag
         id: vars
         run: |
           SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
           echo "SHORT_SHA=$SHORT_SHA" >> $GITHUB_ENV
+
+      - name: Upload static files to S3
+        run: |
+          aws s3 sync staticfiles/ s3://$S3_BUCKET/static/ --delete
+
+      - name: Inject RUM releaseId
+        run: |
+          sed -i "s/__RELEASE_ID__/$SHORT_SHA/" frontend/index.html
+
+      - name: Upload frontend to S3
+        run: |
+          aws s3 sync frontend/ s3://$S3_BUCKET/ \
+            --exclude "static/*" \
+            --cache-control "public, max-age=300"
+
+      - name: Purge CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+          --distribution-id E373BG2H9HPN4J \
+          --paths "/" "/index.html" "/app.js" "/app.css" "/static/*"
 
       - name: Build Docker image
         run: |
