@@ -66,7 +66,7 @@ jobs:
         run: |
           aws cloudfront create-invalidation \
           --distribution-id E373BG2H9HPN4J \
-          --paths "/" "/index.html" "/app.js" "/app.css" "/static/*"
+          --paths "/*"
 
       - name: Build Docker image
         run: |

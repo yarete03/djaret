@@ -19,7 +19,7 @@
         allowCookies: true ,
         enableXRay: true ,
         releaseId: "__RELEASE_ID__", // replaced in CI with git SHA
-        signing: true // If you have a public resource policy and wish to send unsigned requests please set this to false
+        signing: true // signed via Cognito identity pool (unauth role has rum:PutRumEvents)
       };
 
       const APPLICATION_ID = 'ea3be0c3-595c-450a-a298-71fef9748a40';
