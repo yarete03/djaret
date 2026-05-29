@@ -20,7 +20,7 @@
           "errors",
           // Inject X-Amzn-Trace-Id into same-origin API calls so RUM sessions
           // stitch to the backend X-Ray trace (browser -> Lambda -> Django -> RDS).
-          ["http", { addXRayTraceIdHeader: ["https://www.yaret.cloud"], recordAllRequests: true }]
+          ["http", { addXRayTraceIdHeader: true, recordAllRequests: true }]
         ] ,
         allowCookies: true ,
         enableXRay: true ,
