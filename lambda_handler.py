@@ -32,6 +32,8 @@ def handler(event, context):
         force_flush = getattr(provider, "force_flush", None)
         if force_flush is not None:
             try:
-                force_flush()
+                # Bounded so a slow/unreachable exporter can never block the
+                # response for the full Lambda timeout (caused a 504 once).
+                force_flush(timeout_millis=3000)
             except Exception:
                 pass
