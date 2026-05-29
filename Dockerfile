@@ -1,47 +1,31 @@
-FROM public.ecr.aws/docker/library/python:3.12-slim
+FROM public.ecr.aws/lambda/python:3.12
 
-# Install Lambda Web Adapter
-COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.9.1 \
-    /lambda-adapter /opt/extensions/lambda-adapter
+# Build deps for mysqlclient + unzip to extract the ADOT layer.
+RUN dnf install -y gcc mariadb-connector-c-devel unzip && dnf clean all
 
-WORKDIR /app
+# CloudWatch Application Signals: AWS Distro for OpenTelemetry (ADOT) Python layer.
+# Container Lambdas can't attach layers, so extract layer.zip into /opt. In the
+# handler-Lambda model the /opt/otel-instrument wrapper instruments the handler
+# and flushes telemetry synchronously per invocation (no freeze/agent issues).
+RUN curl -sL https://github.com/aws-observability/aws-otel-python-instrumentation/releases/latest/download/layer.zip -o /tmp/layer.zip \
+    && mkdir -p /opt \
+    && unzip -q /tmp/layer.zip -d /opt/ \
+    && chmod -R 755 /opt/ \
+    && rm /tmp/layer.zip
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        build-essential \
-        pkg-config \
-        default-libmysqlclient-dev \
-    && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt ${LAMBDA_TASK_ROOT}/
+RUN pip install -r ${LAMBDA_TASK_ROOT}/requirements.txt
 
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-# Install the instrumentation libraries matching installed packages (Django, dbapi/MySQL).
-RUN opentelemetry-bootstrap -a install
+COPY manage.py rds-global-bundle-ca.pem lambda_handler.py ${LAMBDA_TASK_ROOT}/
+COPY djaret/ ${LAMBDA_TASK_ROOT}/djaret/
+COPY djaret_app/ ${LAMBDA_TASK_ROOT}/djaret_app/
 
-COPY manage.py .
-COPY rds-global-bundle-ca.pem .
-COPY gunicorn.conf.py .
-
-COPY djaret/ ./djaret/
-COPY djaret_app/ ./djaret_app/
-
-ENV PORT=8000
-
-# ADOT collector-less export: the aws_distro SigV4-signs OTLP straight to the
-# CloudWatch X-Ray OTLP endpoint (no collector). OTel is initialized per gunicorn
-# worker in gunicorn.conf.py (post_fork) because the pre-fork model breaks the SDK
-# export thread. initialize() reads these env vars in each worker.
-# Requires X-Ray Transaction Search enabled + xray:PutTraceSegments on the role.
+# AWS_LAMBDA_EXEC_WRAPPER activates the ADOT layer (Application Signals enabled by
+# default). OTEL_PYTHON_DISABLED_INSTRUMENTATIONS=none enables Django + MySQL spans.
 ENV DJANGO_SETTINGS_MODULE=djaret.settings \
-    OTEL_PYTHON_DISTRO=aws_distro \
-    OTEL_PYTHON_CONFIGURATOR=aws_configurator \
-    OTEL_PYTHON_DISABLED_INSTRUMENTATIONS=none \
+    AWS_LAMBDA_EXEC_WRAPPER=/opt/otel-instrument \
     OTEL_SERVICE_NAME=djaret-backend \
-    OTEL_AWS_APPLICATION_SIGNALS_ENABLED=false \
-    OTEL_TRACES_EXPORTER=otlp \
-    OTEL_METRICS_EXPORTER=none \
-    OTEL_LOGS_EXPORTER=none \
-    OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf \
-    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=https://xray.eu-west-1.amazonaws.com/v1/traces
+    OTEL_PYTHON_DISABLED_INSTRUMENTATIONS=none
 
-CMD ["gunicorn", "-c", "gunicorn.conf.py", "djaret.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Lambda handler: lambda_handler.py -> handler (apig-wsgi wrapping Django WSGI).
+CMD ["lambda_handler.handler"]
