@@ -30,6 +30,7 @@ COPY djaret_app/ ${LAMBDA_TASK_ROOT}/djaret_app/
 ENV DJANGO_SETTINGS_MODULE=djaret.settings \
     AWS_LAMBDA_EXEC_WRAPPER=/opt/otel-instrument \
     OTEL_SERVICE_NAME=djaret-backend-pro \
-    OTEL_PYTHON_DISABLED_INSTRUMENTATIONS=none
+    OTEL_PYTHON_DISABLED_INSTRUMENTATIONS=none \
+    OTEL_PYTHON_LOG_CORRELATION=true
 
 CMD ["lambda_handler.handler"]

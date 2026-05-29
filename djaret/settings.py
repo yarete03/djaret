@@ -135,3 +135,24 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Logging: emit to stdout (Lambda -> CloudWatch Logs) with OTel trace/span IDs so
+# logs correlate with X-Ray traces + the Application Signals service. The ADOT
+# logging instrumentation (OTEL_PYTHON_LOG_CORRELATION=true) injects otelTraceID /
+# otelSpanID onto every LogRecord.
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "otel": {
+            "format": "%(asctime)s %(levelname)s [trace_id=%(otelTraceID)s span_id=%(otelSpanID)s] %(name)s %(message)s",
+        },
+    },
+    "handlers": {
+        "console": {"class": "logging.StreamHandler", "formatter": "otel"},
+    },
+    "root": {"handlers": ["console"], "level": "INFO"},
+    "loggers": {
+        "django.request": {"handlers": ["console"], "level": "INFO", "propagate": False},
+    },
+}

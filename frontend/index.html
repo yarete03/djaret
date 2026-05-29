@@ -15,7 +15,13 @@
         sessionSampleRate: 1 ,
         identityPoolId: "eu-west-1:3bbf3f19-a50b-4915-b01d-a86487b1a33e" ,
         endpoint: "https://dataplane.rum.eu-west-1.amazonaws.com" ,
-        telemetries: ["performance","errors","http"] ,
+        telemetries: [
+          "performance",
+          "errors",
+          // Inject X-Amzn-Trace-Id into same-origin API calls so RUM sessions
+          // stitch to the backend X-Ray trace (browser -> Lambda -> Django -> RDS).
+          ["http", { addXRayTraceIdHeader: ["https://www.yaret.cloud"], recordAllRequests: true }]
+        ] ,
         allowCookies: true ,
         enableXRay: true ,
         releaseId: "__RELEASE_ID__", // replaced in CI with git SHA
