@@ -3,3 +3,4 @@ djangorestframework~=3.17.1
 mysqlclient~=2.2.8
 boto3~=1.43.16
 apig-wsgi~=2.19
+aws-opentelemetry-distro
