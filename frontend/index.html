@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>djaret — AWS test</title>
+
+  <!-- CloudWatch RUM. Loaded early so it captures page-load performance.
+       npm snippet kept verbatim; aws-rum-web pulled as ESM (no bundler in repo). -->
+  <script type="module">
+    import { AwsRum } from 'https://esm.sh/aws-rum-web@1.21.0';
+
+    try {
+      const config = {
+        sessionSampleRate: 1 ,
+        identityPoolId: "eu-west-1:698f26ec-06d4-43c3-a7f4-7ad0813b4ed5" ,
+        endpoint: "https://dataplane.rum.eu-west-1.amazonaws.com" ,
+        telemetries: ["performance","errors","http"] ,
+        allowCookies: true ,
+        enableXRay: true ,
+        releaseId: "__RELEASE_ID__", // replaced in CI with git SHA
+        signing: true // If you have a public resource policy and wish to send unsigned requests please set this to false
+      };
+
+      const APPLICATION_ID = 'ea3be0c3-595c-450a-a298-71fef9748a40';
+      const APPLICATION_VERSION = '1.0.0';
+      const APPLICATION_REGION = 'eu-west-1';
+
+      const awsRum = new AwsRum(
+        APPLICATION_ID,
+        APPLICATION_VERSION,
+        APPLICATION_REGION,
+        config
+      );
+    } catch (error) {
+      // Ignore errors thrown during CloudWatch RUM web client initialization
+    }
+  </script>
+
+  <link rel="stylesheet" href="/app.css" />
+</head>
+<body>
+  <main>
+    <h1>djaret</h1>
+    <p>Static frontend on S3, served via CloudFront. Calls the Django API on Lambda.</p>
+    <button id="ping">Call /api/hello/</button>
+    <pre id="out">—</pre>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

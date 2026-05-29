@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local tooling / IDE
+.ai/
+.idea/
+
+# Django
+db.sqlite3
+staticfiles/
