@@ -31,6 +31,7 @@ ENV DJANGO_SETTINGS_MODULE=djaret.settings \
     AWS_LAMBDA_EXEC_WRAPPER=/opt/otel-instrument \
     OTEL_SERVICE_NAME=djaret-lambda-backend-pro \
     OTEL_PYTHON_DISABLED_INSTRUMENTATIONS=none \
-    OTEL_PYTHON_LOG_CORRELATION=true
+    OTEL_PYTHON_LOG_CORRELATION=true \
+    OTEL_TRACES_SAMPLER=always_on
 
 CMD ["lambda_handler.handler"]
