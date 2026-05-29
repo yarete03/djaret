@@ -26,21 +26,25 @@ RUN wget -q https://github.com/aws-observability/aws-otel-python-instrumentation
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt
+# Install the instrumentation libraries matching installed packages (Django, dbapi/MySQL).
+RUN opentelemetry-bootstrap -a install
 
 COPY manage.py .
 COPY rds-global-bundle-ca.pem .
+COPY gunicorn.conf.py .
 
 COPY djaret/ ./djaret/
 COPY djaret_app/ ./djaret_app/
 
 ENV PORT=8000
 
-# ADOT / Application Signals config. AWS_LAMBDA_EXEC_WRAPPER is ignored here
-# (Lambda Web Adapter bypasses the managed runtime bootstrap that reads it),
-# so the wrapper is invoked explicitly as the CMD prefix below instead.
-ENV OTEL_PYTHON_DISTRO=aws_distro \
+# ADOT / Application Signals config. OTel is initialized per gunicorn worker in
+# gunicorn.conf.py (post_fork) because the pre-fork model breaks the SDK export
+# thread. initialize() reads these env vars in each worker.
+ENV DJANGO_SETTINGS_MODULE=djaret.settings \
+    OTEL_PYTHON_DISTRO=aws_distro \
     OTEL_PYTHON_CONFIGURATOR=aws_configurator \
     OTEL_PYTHON_DISABLED_INSTRUMENTATIONS=none \
     OTEL_SERVICE_NAME=djaret-backend
 
-CMD ["/opt/otel-instrument", "gunicorn", "djaret.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "-c", "gunicorn.conf.py", "djaret.wsgi:application", "--bind", "0.0.0.0:8000"]
