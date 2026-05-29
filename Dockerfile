@@ -11,18 +11,7 @@ RUN apt-get update \
         build-essential \
         pkg-config \
         default-libmysqlclient-dev \
-        unzip \
-        wget \
     && rm -rf /var/lib/apt/lists/*
-
-# CloudWatch Application Signals: AWS Distro for OpenTelemetry (ADOT) Python.
-# Container images can't attach Lambda layers, so bake the layer.zip contents
-# into /opt (ADOT distro + collector extension + /opt/otel-instrument wrapper).
-RUN wget -q https://github.com/aws-observability/aws-otel-python-instrumentation/releases/latest/download/layer.zip -O /tmp/layer.zip \
-    && mkdir -p /opt \
-    && unzip -q /tmp/layer.zip -d /opt/ \
-    && chmod -R 755 /opt/ \
-    && rm /tmp/layer.zip
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt
@@ -38,13 +27,21 @@ COPY djaret_app/ ./djaret_app/
 
 ENV PORT=8000
 
-# ADOT / Application Signals config. OTel is initialized per gunicorn worker in
-# gunicorn.conf.py (post_fork) because the pre-fork model breaks the SDK export
-# thread. initialize() reads these env vars in each worker.
+# ADOT collector-less export: the aws_distro SigV4-signs OTLP straight to the
+# CloudWatch X-Ray OTLP endpoint (no collector). OTel is initialized per gunicorn
+# worker in gunicorn.conf.py (post_fork) because the pre-fork model breaks the SDK
+# export thread. initialize() reads these env vars in each worker.
+# Requires X-Ray Transaction Search enabled + xray:PutTraceSegments on the role.
 ENV DJANGO_SETTINGS_MODULE=djaret.settings \
     OTEL_PYTHON_DISTRO=aws_distro \
     OTEL_PYTHON_CONFIGURATOR=aws_configurator \
     OTEL_PYTHON_DISABLED_INSTRUMENTATIONS=none \
-    OTEL_SERVICE_NAME=djaret-backend
+    OTEL_SERVICE_NAME=djaret-backend \
+    OTEL_AWS_APPLICATION_SIGNALS_ENABLED=false \
+    OTEL_TRACES_EXPORTER=otlp \
+    OTEL_METRICS_EXPORTER=none \
+    OTEL_LOGS_EXPORTER=none \
+    OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf \
+    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=https://xray.eu-west-1.amazonaws.com/v1/traces
 
 CMD ["gunicorn", "-c", "gunicorn.conf.py", "djaret.wsgi:application", "--bind", "0.0.0.0:8000"]
