@@ -83,7 +83,14 @@ if os.environ.get("DB_HOST"):
             "USER": os.environ["DB_USER"],
             "HOST": os.environ["DB_HOST"],
             "PORT": "3306",
-            "CONN_MAX_AGE": 0,
+            # Reuse the connection across warm invocations instead of opening a
+            # fresh one per request. Kept under the IAM auth token's 15-min
+            # validity (the backend's token cache regenerates at 13 min) so a
+            # reused connection always retires before its token would expire.
+            "CONN_MAX_AGE": 600,
+            # Drop connections left dead by a frozen/thawed execution
+            # environment before reusing them (Django 4.1+).
+            "CONN_HEALTH_CHECKS": True,
             "OPTIONS": {
                 "ssl": {"ca": str(BASE_DIR / "rds-global-bundle-ca.pem")},
             },
