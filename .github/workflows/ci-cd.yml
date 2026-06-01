@@ -65,7 +65,7 @@ jobs:
       - name: Purge CloudFront cache
         run: |
           aws cloudfront create-invalidation \
-          --distribution-id E373BG2H9HPN4J \
+          --distribution-id E2I5LTCI5TE945 \
           --paths "/*"
 
       - name: Build Docker image

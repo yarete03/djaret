@@ -20,7 +20,7 @@ variable "domain_name" {
 
 variable "image_tag" {
   type    = string
-  default = "7f3903e"
+  default = "febb2d09816b"
 }
 
 variable "tags" {

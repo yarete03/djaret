@@ -23,7 +23,7 @@ module "rds" {
 
   iam_database_authentication_enabled = true
 
-  manage_master_user_password   = false
+  manage_master_user_password   = true
   master_user_secret_kms_key_id = data.aws_kms_alias.secretsmanager.target_key_arn
   username                      = "root"
   port                          = 3306
