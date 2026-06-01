@@ -1,5 +1,5 @@
 # ---------- builder: compile deps, fetch ADOT layer ----------
-FROM --platform=linux/arm64 public.ecr.aws/lambda/python:3.12 AS builder
+FROM public.ecr.aws/lambda/python:3.12 AS builder
 
 # gcc + headers only needed to BUILD mysqlclient; unzip only to extract the
 # layer. None of this ships to the runtime image (see slim runtime stage below).
@@ -20,7 +20,7 @@ COPY requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 
 # ---------- runtime: slim, no compiler/headers ----------
-FROM --platform=linux/arm64 public.ecr.aws/lambda/python:3.12
+FROM public.ecr.aws/lambda/python:3.12
 
 # Runtime shared lib for mysqlclient's C extension (libmariadb) — no compiler,
 # no headers. Keeps the runtime image small (~610MB vs ~936MB single-stage) =>
