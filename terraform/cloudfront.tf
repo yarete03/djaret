@@ -50,9 +50,10 @@ module "cloudfront" {
 
   origin = {
     s3 = {
-      domain_name           = module.s3.s3_bucket_bucket_regional_domain_name
-      origin_id             = module.s3.s3_bucket_id
-      origin_access_control = local.oac_name
+      domain_name                 = module.s3.s3_bucket_bucket_regional_domain_name
+      origin_id                   = module.s3.s3_bucket_id
+      origin_access_control_key   = local.oac_name
+      response_completion_timeout = 0
 
       origin_shield = {
         enabled              = true
