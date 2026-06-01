@@ -21,6 +21,12 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -68,13 +74,13 @@ jobs:
           --distribution-id E2I5LTCI5TE945 \
           --paths "/*"
 
-      - name: Build Docker image
+      - name: Build & push Docker image (arm64)
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/djaret:$SHORT_SHA .
-
-      - name: Push image to ECR
-        run: |
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY/djaret:$SHORT_SHA
+          docker buildx build \
+            --platform linux/arm64 \
+            -t $ECR_REGISTRY/$ECR_REPOSITORY/djaret:$SHORT_SHA \
+            --push \
+            .
 
       - name: Update Lambda image
         run: |
