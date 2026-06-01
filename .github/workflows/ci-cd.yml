@@ -75,6 +75,8 @@ jobs:
           --paths "/*"
 
       - name: Build & push Docker image (arm64)
+        env:
+          BUILDX_NO_DEFAULT_ATTESTATIONS: 1
         run: |
           docker buildx build \
             --platform linux/arm64 \
