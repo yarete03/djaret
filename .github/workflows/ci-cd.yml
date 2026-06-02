@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04-arm
     permissions:
       id-token: write
-      contents: read
+      contents: write
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -25,12 +25,14 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Configure AWS credentials (OIDC)
+        if: github.event_name == 'push'
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::884916644426:role/djaret-github-actions-role-pro
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
+        if: github.event_name == 'push'
         run: |
           aws ecr get-login-password --region $AWS_REGION \
             | docker login \
@@ -52,6 +54,7 @@ jobs:
           echo "SHORT_SHA=$SHORT_SHA" >> $GITHUB_ENV
 
       - name: Upload static files to S3
+        if: github.event_name == 'push'
         run: |
           aws s3 sync staticfiles/ s3://$S3_BUCKET/static/ --delete
 
@@ -60,12 +63,14 @@ jobs:
           sed -i "s/__RELEASE_ID__/$SHORT_SHA/" frontend/index.html
 
       - name: Upload frontend to S3
+        if: github.event_name == 'push'
         run: |
           aws s3 sync frontend/ s3://$S3_BUCKET/ \
             --exclude "static/*" \
             --cache-control "public, max-age=300"
 
       - name: Purge CloudFront cache
+        if: github.event_name == 'push'
         run: |
           aws cloudfront create-invalidation \
           --distribution-id E2I5LTCI5TE945 \
@@ -74,6 +79,7 @@ jobs:
       - name: Build & push Docker image (arm64)
         env:
           BUILDX_NO_DEFAULT_ATTESTATIONS: 1
+          PUSH: ${{ github.event_name == 'push' }}
         run: |
           docker buildx build \
             --platform linux/arm64 \
@@ -81,12 +87,23 @@ jobs:
             --cache-to type=gha,mode=max \
             --provenance=false \
             --sbom=false \
-            --output type=image,oci-mediatypes=false,push=true \
+            --output type=image,oci-mediatypes=false,push=$PUSH \
             -t $ECR_REGISTRY/$ECR_REPOSITORY/djaret:$SHORT_SHA \
             .
 
       - name: Update Lambda image
+        if: github.event_name == 'push'
         run: |
           aws lambda update-function-code \
             --function-name djaret-lambda-pro \
             --image-uri $ECR_REGISTRY/$ECR_REPOSITORY/djaret:$SHORT_SHA
+
+      - name: Sync image tag into Terraform
+        if: github.event_name == 'push'
+        run: |
+          echo "image_tag = \"$SHORT_SHA\"" > terraform/image.auto.tfvars
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add terraform/image.auto.tfvars
+          git diff --cached --quiet || git commit -m "ci: set lambda image_tag to $SHORT_SHA [skip ci]"
+          git push

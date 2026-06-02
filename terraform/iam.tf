@@ -36,8 +36,9 @@ module "github_actions_role" {
           Principal = { Federated = module.github_oidc.arn }
           Action    = "sts:AssumeRoleWithWebIdentity"
           Condition = {
-            StringLike = {
-              "token.actions.githubusercontent.com:sub" = "repo:yarete03/${var.project_name}:*"
+            StringEquals = {
+              "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
+              "token.actions.githubusercontent.com:sub" = "repo:yarete03/${var.project_name}:ref:refs/heads/master"
             }
           }
         }

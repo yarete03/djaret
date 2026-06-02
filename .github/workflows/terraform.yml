@@ -1,0 +1,105 @@
+name: Terraform Infra
+
+on:
+  workflow_run:
+    workflows: ["Django CI-CD"]
+    types: [completed]
+    branches: [ master ]
+  workflow_dispatch:
+    inputs:
+      action:
+        description: Terraform action to run
+        type: choice
+        options:
+          - plan
+          - apply
+        default: plan
+
+env:
+  AWS_REGION: eu-west-1
+  TF_WORKSPACE: pro
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: terraform-pro
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::884916644426:role/djaret-terraform-role-pro
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.15.2"
+
+      - name: Terraform Init
+        run: terraform init -input=false
+
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -input=false -no-color -out=tfplan
+
+      - name: Upload plan artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: terraform/tfplan
+          retention-days: 1
+          if-no-files-found: error
+
+  apply:
+    needs: plan
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'apply'
+    runs-on: ubuntu-latest
+    environment: production
+    defaults:
+      run:
+        working-directory: terraform
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::884916644426:role/djaret-terraform-role-pro
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.15.2"
+
+      - name: Terraform Init
+        run: terraform init -input=false
+
+      - name: Download plan artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: tfplan
+          path: terraform
+
+      - name: Terraform Apply
+        run: terraform apply -input=false tfplan

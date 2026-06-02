@@ -1,9 +1,3 @@
-resource "random_password" "rds_master" {
-  length           = 40
-  special          = true
-  override_special = ":@.,/+-!="
-}
-
 module "rds" {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-rds.git?ref=v7.2.0"
 

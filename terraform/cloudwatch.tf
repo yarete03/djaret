@@ -16,3 +16,19 @@ resource "aws_rum_app_monitor" "cw_rum_app_monitor" {
     status = "ENABLED"
   }
 }
+
+resource "aws_xray_trace_segment_destination" "xray_trace_segment_destination" {
+  destination = "CloudWatchLogs"
+}
+
+resource "aws_xray_indexing_rule" "xray_indexing_rule" {
+  name = "Default"
+
+  rule {
+    probabilistic {
+      desired_sampling_percentage = 100
+    }
+  }
+
+  depends_on = [aws_xray_trace_segment_destination.xray_trace_segment_destination]
+}
