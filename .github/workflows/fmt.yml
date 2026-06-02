@@ -1,0 +1,30 @@
+name: Terraform Format
+
+on:
+  pull_request:
+    branches: [ master ]
+    paths:
+      - 'terraform/**'
+  push:
+    branches: [ master ]
+    paths:
+      - 'terraform/**'
+
+permissions:
+  contents: read
+
+jobs:
+  fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.15.2"
+
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+        working-directory: terraform
