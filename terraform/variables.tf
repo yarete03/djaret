@@ -1,21 +1,21 @@
 variable "region" {
-  type    = string
+  type = string
 }
 
 variable "account_id" {
-  type    = string
+  type = string
 }
 
 variable "project_name" {
-  type    = string
+  type = string
 }
 
 variable "domain_name" {
-  type    = string
+  type = string
 }
 
 variable "image_tag" {
-  type    = string
+  type = string
 }
 
 variable "tags" {
