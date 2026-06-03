@@ -12,4 +12,6 @@ module "acm" {
   create_route53_records = false
   validate_certificate   = false
   wait_for_validation    = false
+
+  tags = var.tags
 }

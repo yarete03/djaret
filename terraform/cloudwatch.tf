@@ -15,6 +15,8 @@ resource "aws_rum_app_monitor" "cw_rum_app_monitor" {
   custom_events {
     status = "ENABLED"
   }
+
+  tags = var.tags
 }
 
 resource "aws_xray_trace_segment_destination" "xray_trace_segment_destination" {
