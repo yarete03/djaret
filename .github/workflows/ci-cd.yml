@@ -16,10 +16,8 @@ env:
   ECR_REPOSITORY: djaret-ecr-pro
   ECR_REGISTRY: 884916644426.dkr.ecr.eu-west-1.amazonaws.com
   S3_BUCKET: djaret-s3-pro
-
-concurrency:
-  group: djaret-infra-lock
-  cancel-in-progress: false
+  TFSTATE_BUCKET: djaret-tfstate-pro
+  TFSTATE_LOCK_KEY: terraform.tfstate.tflock
 
 jobs:
   CI-CD:
@@ -28,18 +26,42 @@ jobs:
       id-token: write
       contents: write
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v6
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4
-
       - name: Configure AWS credentials (OIDC)
         if: github.event_name == 'push'
         uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::884916644426:role/djaret-github-actions-role-pro
           aws-region: ${{ env.AWS_REGION }}
+
+      - name: Acquire Terraform state lock
+        id: tflock
+        if: github.event_name == 'push'
+        run: |
+          lock_id=$(cat /proc/sys/kernel/random/uuid)
+          printf '{"ID":"%s","Operation":"ci-cd","Who":"gha-run-%s","Created":"%s","Path":"%s/terraform.tfstate"}' \
+            "$lock_id" "$GITHUB_RUN_ID" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$TFSTATE_BUCKET" > /tmp/tflock.json
+          for i in $(seq 1 30); do
+            if aws s3api put-object --bucket "$TFSTATE_BUCKET" --key "$TFSTATE_LOCK_KEY" \
+                 --if-none-match '*' --content-type application/json --body /tmp/tflock.json 2>/tmp/tflock.err; then
+              echo "acquired=true" >> "$GITHUB_OUTPUT"
+              echo "lock_id=$lock_id" >> "$GITHUB_OUTPUT"
+              echo "Terraform state lock acquired (id=$lock_id)."
+              exit 0
+            fi
+            if grep -q 'PreconditionFailed' /tmp/tflock.err; then
+              echo "State lock held by another process; retry $i/30 in 10s..."
+              sleep 10
+            else
+              echo "::error::Unexpected error acquiring state lock:"; cat /tmp/tflock.err; exit 1
+            fi
+          done
+          echo "::error::Timed out acquiring Terraform state lock after 5 min."; exit 1
+
+      - name: Checkout repo
+        uses: actions/checkout@v6
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
 
       - name: Login to Amazon ECR
         if: github.event_name == 'push'
@@ -117,3 +139,20 @@ jobs:
           git add terraform/image.auto.tfvars
           git diff --cached --quiet || git commit -m "ci: set lambda image_tag to $SHORT_SHA [skip ci]"
           git push
+
+      - name: Release Terraform state lock
+        if: always() && steps.tflock.outputs.acquired == 'true'
+        env:
+          OUR_LOCK_ID: ${{ steps.tflock.outputs.lock_id }}
+        run: |
+          if ! aws s3api get-object --bucket "$TFSTATE_BUCKET" --key "$TFSTATE_LOCK_KEY" /tmp/cur.json >/dev/null 2>&1; then
+            echo "Lock object already gone; nothing to release."
+            exit 0
+          fi
+          current_id=$(jq -r '.ID // empty' /tmp/cur.json)
+          if [ "$current_id" = "$OUR_LOCK_ID" ]; then
+            aws s3api delete-object --bucket "$TFSTATE_BUCKET" --key "$TFSTATE_LOCK_KEY"
+            echo "Terraform state lock released (id=$OUR_LOCK_ID)."
+          else
+            echo "::warning::Lock id mismatch (current='$current_id', ours='$OUR_LOCK_ID'); not ours, leaving it."
+          fi
