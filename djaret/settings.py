@@ -21,12 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+n+t+d5zj!qd93-61-9#j81q#8nr$#2o47g(tv5-3r@(0$w4v+'
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY", "django-insecure-build-only-do-not-use-in-production"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [h for h in os.environ.get("DJANGO_ALLOWED_HOSTS", "www.yaret.cloud").split(",") if h]
 
 CSRF_TRUSTED_ORIGINS = ["https://www.yaret.cloud"]
 
