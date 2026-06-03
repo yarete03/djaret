@@ -29,8 +29,14 @@ module "rds" {
   create_db_subnet_group = false
   db_subnet_group_name   = module.vpc.database_subnet_group_name
 
-  create_db_parameter_group = false
-  parameter_group_name      = "default.mysql8.4"
+  create_db_parameter_group = true
+  parameters = [
+    {
+      name         = "sql_mode"
+      value        = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+      apply_method = "immediate"
+    }
+  ]
 
   create_db_option_group = false
   option_group_name      = "default:mysql-8-4"
