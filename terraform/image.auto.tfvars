@@ -1,1 +1,1 @@
-image_tag = "d262b42"
+image_tag = "e3e6a25"
