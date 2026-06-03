@@ -41,7 +41,7 @@ module "rds" {
   create_db_option_group = false
   option_group_name      = "default:mysql-8-4"
 
-  backup_retention_period = 1
+  backup_retention_period = 7
   backup_window           = "03:08-03:38"
   maintenance_window      = "mon:00:18-mon:00:48"
 
