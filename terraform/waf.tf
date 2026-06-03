@@ -97,6 +97,38 @@ module "waf" {
         sampled_requests_enabled   = true
       }
     }
+
+    "AWS-AWSManagedRulesSQLiRuleSet" = {
+      priority        = 4
+      override_action = "none"
+      statement = {
+        managed_rule_group_statement = {
+          vendor_name = "AWS"
+          name        = "AWSManagedRulesSQLiRuleSet"
+        }
+      }
+      visibility_config = {
+        cloudwatch_metrics_enabled = true
+        metric_name                = "AWS-AWSManagedRulesSQLiRuleSet"
+        sampled_requests_enabled   = true
+      }
+    }
+
+    "AWS-AWSManagedRulesUnixRuleSet" = {
+      priority        = 5
+      override_action = "none"
+      statement = {
+        managed_rule_group_statement = {
+          vendor_name = "AWS"
+          name        = "AWSManagedRulesUnixRuleSet"
+        }
+      }
+      visibility_config = {
+        cloudwatch_metrics_enabled = true
+        metric_name                = "AWS-AWSManagedRulesUnixRuleSet"
+        sampled_requests_enabled   = true
+      }
+    }
   }
 
   tags = var.tags
