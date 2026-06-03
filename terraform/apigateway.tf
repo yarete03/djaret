@@ -4,6 +4,8 @@ resource "aws_api_gateway_rest_api" "api_gateway" {
   endpoint_configuration {
     types = ["REGIONAL"]
   }
+
+  tags = var.tags
 }
 
 resource "aws_api_gateway_resource" "proxy" {
@@ -39,7 +41,7 @@ resource "aws_api_gateway_integration" "proxy_lambda" {
   }
 }
 
-resource "aws_api_gateway_deployment" "this" {
+resource "aws_api_gateway_deployment" "api_gateway_deployment" {
   rest_api_id = aws_api_gateway_rest_api.api_gateway.id
 
   triggers = {
@@ -55,14 +57,16 @@ resource "aws_api_gateway_deployment" "this" {
   }
 }
 
-resource "aws_api_gateway_stage" "this" {
+resource "aws_api_gateway_stage" "api_gateway_stage" {
   rest_api_id          = aws_api_gateway_rest_api.api_gateway.id
-  deployment_id        = aws_api_gateway_deployment.this.id
+  deployment_id        = aws_api_gateway_deployment.api_gateway_deployment.id
   stage_name           = terraform.workspace
   xray_tracing_enabled = true
+
+  tags = var.tags
 }
 
-resource "aws_lambda_permission" "apigw" {
+resource "aws_lambda_permission" "apigw_lambda_permissions" {
   statement_id  = "187bacc9-bcf0-5aa2-bae7-7e1d12b63d85"
   action        = "lambda:InvokeFunction"
   function_name = module.lambda.lambda_function_name
