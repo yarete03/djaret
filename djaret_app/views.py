@@ -1,7 +1,9 @@
-from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from .models import Service
+
 
 class HelloView(APIView):
     def get(self, request):
-        return Response({"message": "Hello from Lambda"})
+        name = Service.objects.values_list("name", flat=True).first() or "Lambda"
+        return Response({"message": f"Hello from {name}"})
