@@ -7,7 +7,24 @@ module "ecr" {
   repository_encryption_type      = "KMS"
   repository_kms_key              = data.aws_kms_alias.ecr.target_key_arn
 
-  create_lifecycle_policy  = false
+  create_lifecycle_policy = true
+  repository_lifecycle_policy = jsonencode({
+    rules = [
+      {
+        rulePriority = 1
+        description  = "Keep only the last 10 images"
+        selection = {
+          tagStatus   = "any"
+          countType   = "imageCountMoreThan"
+          countNumber = 10
+        }
+        action = {
+          type = "expire"
+        }
+      }
+    ]
+  })
+
   attach_repository_policy = false
 
   tags = var.tags
