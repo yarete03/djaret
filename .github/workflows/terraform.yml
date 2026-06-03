@@ -15,6 +15,7 @@ env:
 permissions:
   id-token: write
   contents: read
+  security-events: write
 
 jobs:
   plan:
@@ -25,6 +26,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v6
@@ -42,6 +45,30 @@ jobs:
 
       - name: Terraform Validate
         run: terraform validate
+
+      - name: SonarQube Cloud scan (Terraform IaC)
+        uses: SonarSource/sonarqube-scan-action@v8
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: terraform
+
+      - name: Trivy IaC misconfig scan
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: config
+          scan-ref: terraform
+          format: sarif
+          output: trivy-config.sarif
+          severity: HIGH,CRITICAL
+          exit-code: 1
+
+      - name: Upload Trivy SARIF
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-config.sarif
+          category: trivy-config
 
       - name: Terraform Plan
         run: terraform plan -input=false -lock-timeout=10m -out=tfplan
