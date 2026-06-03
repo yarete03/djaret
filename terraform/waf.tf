@@ -17,6 +17,9 @@ module "waf" {
     sampled_requests_enabled   = true
   }
 
+  create_logging_configuration    = true
+  logging_log_destination_configs = [module.waf_log_group.cloudwatch_log_group_arn]
+
   rules = {
     "AWS-AWSManagedRulesAntiDDoSRuleSet" = {
       priority        = 0

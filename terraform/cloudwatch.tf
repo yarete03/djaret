@@ -32,3 +32,15 @@ resource "aws_xray_indexing_rule" "xray_indexing_rule" {
 
   depends_on = [aws_xray_trace_segment_destination.xray_trace_segment_destination]
 }
+
+module "waf_log_group" {
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/log-group?ref=v5.7.2"
+
+  providers = {
+    aws = aws.us_east_1
+  }
+
+  name              = "aws-waf-logs-${var.project_name}-${terraform.workspace}"
+  retention_in_days = 90
+  tags              = var.tags
+}
