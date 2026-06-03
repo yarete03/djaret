@@ -16,8 +16,8 @@ env:
   ECR_REPOSITORY: djaret-ecr-pro
   ECR_REGISTRY: 884916644426.dkr.ecr.eu-west-1.amazonaws.com
   S3_BUCKET: djaret-s3-pro
-  TFSTATE_BUCKET: djaret-tfstate-pro
-  TFSTATE_LOCK_KEY: terraform.tfstate.tflock
+  TFSTATE_BUCKET: djaret-tfstate
+  TFSTATE_LOCK_KEY: env:/pro/terraform.tfstate.tflock
 
 jobs:
   CI-CD:
@@ -38,7 +38,7 @@ jobs:
         if: github.event_name == 'push'
         run: |
           lock_id=$(cat /proc/sys/kernel/random/uuid)
-          printf '{"ID":"%s","Operation":"ci-cd","Who":"gha-run-%s","Created":"%s","Path":"%s/terraform.tfstate"}' \
+          printf '{"ID":"%s","Operation":"ci-cd","Who":"gha-run-%s","Created":"%s","Path":"%s/env:/pro/terraform.tfstate"}' \
             "$lock_id" "$GITHUB_RUN_ID" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$TFSTATE_BUCKET" > /tmp/tflock.json
           for i in $(seq 1 30); do
             if aws s3api put-object --bucket "$TFSTATE_BUCKET" --key "$TFSTATE_LOCK_KEY" \

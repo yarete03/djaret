@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 1.10"
 
   backend "s3" {
-    bucket       = "djaret-tfstate-pro"
+    bucket       = "djaret-tfstate"
     key          = "terraform.tfstate"
     region       = "eu-west-1"
     encrypt      = true
