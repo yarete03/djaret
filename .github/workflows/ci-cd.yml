@@ -2,14 +2,24 @@ name: Django CI-CD
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - 'terraform/**'
+      - '**.md'
   pull_request:
     branches: [ master ]
+    paths-ignore:
+      - 'terraform/**'
+      - '**.md'
 
 env:
   AWS_REGION: eu-west-1
   ECR_REPOSITORY: djaret-ecr-pro
   ECR_REGISTRY: 884916644426.dkr.ecr.eu-west-1.amazonaws.com
   S3_BUCKET: djaret-s3-pro
+
+concurrency:
+  group: djaret-infra-lock
+  cancel-in-progress: false
 
 jobs:
   CI-CD:
