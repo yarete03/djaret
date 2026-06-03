@@ -87,6 +87,23 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+      - name: Trivy pipeline misconfig scan
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: config
+          scan-ref: .github/workflows/ci-cd.yml
+          format: sarif
+          output: trivy-pipeline.sarif
+          severity: HIGH,CRITICAL
+          exit-code: 1
+
+      - name: Upload Trivy SARIF (pipeline)
+        if: always() && hashFiles('trivy-pipeline.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: trivy-pipeline.sarif
+          category: trivy-pipeline
+
       - name: Generate image tag
         id: vars
         run: |
@@ -141,8 +158,8 @@ jobs:
           exit-code: 1
 
       - name: Upload Trivy SARIF
-        if: always()
-        uses: github/codeql-action/upload-sarif@v3
+        if: always() && hashFiles('trivy-image.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: trivy-image.sarif
           category: trivy-image

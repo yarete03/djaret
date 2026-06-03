@@ -46,12 +46,17 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-      - name: SonarQube Cloud scan (Terraform IaC)
+      - name: SonarQube Cloud scan (Terraform IaC + pipeline)
         uses: SonarSource/sonarqube-scan-action@v8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          projectBaseDir: terraform
+          projectBaseDir: .
+          args: >
+            -Dsonar.organization=yarete03
+            -Dsonar.projectKey=djaret-terraform
+            -Dsonar.sources=terraform,.github/workflows/terraform.yml
+            -Dsonar.exclusions=**/.terraform/**,**/*.tfstate,**/*.tfstate.*,terraform/tfplan
 
       - name: Trivy IaC misconfig scan
         uses: aquasecurity/trivy-action@v0.36.0
@@ -63,12 +68,29 @@ jobs:
           severity: HIGH,CRITICAL
           exit-code: 1
 
-      - name: Upload Trivy SARIF
-        if: always()
-        uses: github/codeql-action/upload-sarif@v3
+      - name: Upload Trivy SARIF (IaC)
+        if: always() && hashFiles('trivy-config.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: trivy-config.sarif
           category: trivy-config
+
+      - name: Trivy pipeline misconfig scan
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: config
+          scan-ref: .github/workflows/terraform.yml
+          format: sarif
+          output: trivy-pipeline.sarif
+          severity: HIGH,CRITICAL
+          exit-code: 1
+
+      - name: Upload Trivy SARIF (pipeline)
+        if: always() && hashFiles('trivy-pipeline.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: trivy-pipeline.sarif
+          category: trivy-pipeline
 
       - name: Terraform Plan
         run: terraform plan -input=false -lock-timeout=10m -out=tfplan
