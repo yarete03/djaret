@@ -67,7 +67,7 @@ module "github_actions_role" {
         "${module.s3.s3_bucket_arn}/*",
       ]
     }
-    tfstate_lock = {
+    tfstatelock = {
       actions   = ["s3:PutObject", "s3:GetObject", "s3:DeleteObject"]
       resources = ["arn:aws:s3:::${var.project_name}-tfstate/env:/${terraform.workspace}/terraform.tfstate.tflock"]
     }
