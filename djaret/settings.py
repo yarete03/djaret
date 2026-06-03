@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [h for h in os.environ.get("DJANGO_ALLOWED_HOSTS", "www.yaret.cloud").split(",") if h]
+ALLOWED_HOSTS = [host for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "www.yaret.cloud").split(",") if host]
 
 CSRF_TRUSTED_ORIGINS = ["https://www.yaret.cloud"]
 
