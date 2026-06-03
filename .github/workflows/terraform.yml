@@ -63,6 +63,7 @@ jobs:
         with:
           scan-type: config
           scan-ref: terraform
+          skip-dirs: '**/.terraform/**'
           format: sarif
           output: trivy-config.sarif
           severity: HIGH,CRITICAL
