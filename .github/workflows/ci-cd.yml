@@ -90,6 +90,7 @@ jobs:
       - name: Trivy pipeline misconfig scan
         uses: aquasecurity/trivy-action@v0.36.0
         with:
+          version: v0.71.0
           scan-type: config
           scan-ref: .github/workflows/ci-cd.yml
           format: sarif
@@ -150,6 +151,7 @@ jobs:
       - name: Trivy image scan (gate on HIGH/CRITICAL)
         uses: aquasecurity/trivy-action@v0.36.0
         with:
+          version: v0.71.0
           image-ref: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}/djaret:${{ env.SHORT_SHA }}
           format: sarif
           output: trivy-image.sarif
