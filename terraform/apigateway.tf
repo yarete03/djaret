@@ -14,7 +14,6 @@ resource "aws_api_gateway_resource" "proxy" {
   path_part   = "{proxy+}"
 }
 
-# trivy:ignore:AVD-AWS-0004 public CloudFront->API proxy; authn/authz enforced in-app by Django + Cognito
 resource "aws_api_gateway_method" "proxy_any" {
   rest_api_id   = aws_api_gateway_rest_api.api_gateway.id
   resource_id   = aws_api_gateway_resource.proxy.id
@@ -50,6 +49,7 @@ resource "aws_api_gateway_deployment" "api_gateway_deployment" {
       aws_api_gateway_resource.proxy.id,
       aws_api_gateway_method.proxy_any.id,
       aws_api_gateway_integration.proxy_lambda.id,
+      aws_api_gateway_rest_api_policy.cloudfront_only.policy,
     ]))
   }
 
@@ -58,8 +58,55 @@ resource "aws_api_gateway_deployment" "api_gateway_deployment" {
   }
 }
 
-resource "aws_api_gateway_account" "this" {
+resource "aws_api_gateway_account" "api_gateway_account" {
   cloudwatch_role_arn = module.api_gateway_cloudwatch_role.arn
+}
+
+# Restrict the API to CloudFront only: deny any source IP outside AWS's managed
+# CloudFront origin-facing prefix list. Stops direct hits on the execute-api URL
+# that would bypass CloudFront + WAF. Changing the policy requires a redeploy,
+# so its body feeds the deployment trigger above.
+data "aws_ec2_managed_prefix_list" "cloudfront_origin_facing" {
+  name = "com.amazonaws.global.cloudfront.origin-facing"
+}
+
+data "aws_iam_policy_document" "api_gateway_cloudfront_only" {
+  statement {
+    sid    = "AllowInvoke"
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions   = ["execute-api:Invoke"]
+    resources = ["${aws_api_gateway_rest_api.api_gateway.execution_arn}/*"]
+  }
+
+  statement {
+    sid    = "DenyNonCloudFront"
+    effect = "Deny"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions   = ["execute-api:Invoke"]
+    resources = ["${aws_api_gateway_rest_api.api_gateway.execution_arn}/*"]
+
+    condition {
+      test     = "NotIpAddress"
+      variable = "aws:SourceIp"
+      values   = data.aws_ec2_managed_prefix_list.cloudfront_origin_facing.entries[*].cidr
+    }
+  }
+}
+
+resource "aws_api_gateway_rest_api_policy" "cloudfront_only" {
+  rest_api_id = aws_api_gateway_rest_api.api_gateway.id
+  policy      = data.aws_iam_policy_document.api_gateway_cloudfront_only.json
 }
 
 resource "aws_api_gateway_stage" "api_gateway_stage" {
@@ -68,7 +115,7 @@ resource "aws_api_gateway_stage" "api_gateway_stage" {
   stage_name           = terraform.workspace
   xray_tracing_enabled = true
 
-  depends_on = [aws_api_gateway_account.this]
+  depends_on = [aws_api_gateway_account.api_gateway_account]
 
   access_log_settings {
     destination_arn = module.api_gateway_log_group.cloudwatch_log_group_arn
