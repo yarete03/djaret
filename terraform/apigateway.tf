@@ -14,6 +14,7 @@ resource "aws_api_gateway_resource" "proxy" {
   path_part   = "{proxy+}"
 }
 
+# trivy:ignore:AVD-AWS-0004 public CloudFront->API proxy; authn/authz enforced in-app by Django + Cognito
 resource "aws_api_gateway_method" "proxy_any" {
   rest_api_id   = aws_api_gateway_rest_api.api_gateway.id
   resource_id   = aws_api_gateway_resource.proxy.id
@@ -62,6 +63,20 @@ resource "aws_api_gateway_stage" "api_gateway_stage" {
   deployment_id        = aws_api_gateway_deployment.api_gateway_deployment.id
   stage_name           = terraform.workspace
   xray_tracing_enabled = true
+
+  access_log_settings {
+    destination_arn = module.api_gateway_log_group.cloudwatch_log_group_arn
+    format = jsonencode({
+      requestId      = "$context.requestId"
+      ip             = "$context.identity.sourceIp"
+      requestTime    = "$context.requestTime"
+      httpMethod     = "$context.httpMethod"
+      resourcePath   = "$context.resourcePath"
+      status         = "$context.status"
+      protocol       = "$context.protocol"
+      responseLength = "$context.responseLength"
+    })
+  }
 
   tags = var.tags
 }

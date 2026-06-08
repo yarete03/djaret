@@ -140,6 +140,15 @@ module "cloudfront" {
     minimum_protocol_version = "TLSv1.2_2021"
   }
 
+  enable_v2_logging = true
+  v2_logging = {
+    name          = "${var.project_name}-cloudfront-${terraform.workspace}"
+    output_format = "json"
+    delivery_destination_configuration = {
+      destination_resource_arn = module.cloudfront_log_group.cloudwatch_log_group_arn
+    }
+  }
+
   tags = merge(var.tags, {
     Name = "${var.project_name}-cloudfront-${terraform.workspace}"
   })

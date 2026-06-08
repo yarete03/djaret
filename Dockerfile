@@ -17,7 +17,7 @@ RUN curl -sL https://github.com/aws-observability/aws-otel-python-instrumentatio
     && rm /tmp/layer.zip
 
 COPY requirements.txt /tmp/requirements.txt
-RUN pip install -r /tmp/requirements.txt
+RUN pip install --upgrade pip && pip install -r /tmp/requirements.txt
 
 # ---------- runtime: slim, no compiler/headers ----------
 FROM public.ecr.aws/lambda/python:3.12

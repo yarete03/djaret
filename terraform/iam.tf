@@ -231,3 +231,30 @@ module "rds_monitoring_role" {
 
   tags = var.tags
 }
+
+data "aws_iam_policy_document" "cloudfront_logs_delivery" {
+  statement {
+    sid    = "AWSLogDeliveryWrite"
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["delivery.logs.amazonaws.com"]
+    }
+
+    actions   = ["logs:CreateLogStream", "logs:PutLogEvents"]
+    resources = ["${module.cloudfront_log_group.cloudwatch_log_group_arn}:log-stream:*"]
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:SourceAccount"
+      values   = [var.account_id]
+    }
+  }
+}
+
+resource "aws_cloudwatch_log_resource_policy" "cloudfront_logs_delivery" {
+  provider        = aws.us_east_1
+  policy_name     = "${var.project_name}-cloudfront-logs-delivery-${terraform.workspace}"
+  policy_document = data.aws_iam_policy_document.cloudfront_logs_delivery.json
+}

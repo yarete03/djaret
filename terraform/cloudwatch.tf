@@ -46,3 +46,23 @@ module "waf_log_group" {
   retention_in_days = 90
   tags              = var.tags
 }
+
+module "api_gateway_log_group" {
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/log-group?ref=v5.7.2"
+
+  name              = "/aws/apigateway/${var.project_name}-${terraform.workspace}"
+  retention_in_days = 90
+  tags              = var.tags
+}
+
+module "cloudfront_log_group" {
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/log-group?ref=v5.7.2"
+
+  providers = {
+    aws = aws.us_east_1
+  }
+
+  name              = "/aws/cloudfront/${var.project_name}-${terraform.workspace}"
+  retention_in_days = 90
+  tags              = var.tags
+}
