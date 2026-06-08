@@ -27,6 +27,7 @@ RUN dnf install -y mariadb-connector-c shadow-utils && dnf clean all \
 
 # Bring over the ADOT layer and the installed site-packages from the builder.
 COPY --from=builder /opt /opt
+RUN rm -rf /var/lang/lib/python3.12/site-packages
 COPY --from=builder /var/lang/lib/python3.12/site-packages /var/lang/lib/python3.12/site-packages
 
 COPY manage.py rds-global-bundle-ca.pem lambda_handler.py ${LAMBDA_TASK_ROOT}/
