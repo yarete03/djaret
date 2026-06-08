@@ -232,6 +232,35 @@ module "rds_monitoring_role" {
   tags = var.tags
 }
 
+# Account-level role API Gateway assumes to push access logs to CloudWatch Logs.
+# Required by aws_api_gateway_account before any stage can enable logging.
+module "api_gateway_cloudwatch_role" {
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-iam.git//modules/iam-role?ref=v6.6.1"
+
+  name            = "${var.project_name}-apigw-cloudwatch-role-${terraform.workspace}"
+  use_name_prefix = false
+  path            = "/"
+
+  source_trust_policy_documents = [
+    jsonencode({
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Effect    = "Allow"
+          Principal = { Service = "apigateway.amazonaws.com" }
+          Action    = "sts:AssumeRole"
+        }
+      ]
+    })
+  ]
+
+  policies = {
+    push_to_cw = "arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+  }
+
+  tags = var.tags
+}
+
 data "aws_iam_policy_document" "cloudfront_logs_delivery" {
   statement {
     sid    = "AWSLogDeliveryWrite"

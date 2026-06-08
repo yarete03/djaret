@@ -58,11 +58,17 @@ resource "aws_api_gateway_deployment" "api_gateway_deployment" {
   }
 }
 
+resource "aws_api_gateway_account" "this" {
+  cloudwatch_role_arn = module.api_gateway_cloudwatch_role.arn
+}
+
 resource "aws_api_gateway_stage" "api_gateway_stage" {
   rest_api_id          = aws_api_gateway_rest_api.api_gateway.id
   deployment_id        = aws_api_gateway_deployment.api_gateway_deployment.id
   stage_name           = terraform.workspace
   xray_tracing_enabled = true
+
+  depends_on = [aws_api_gateway_account.this]
 
   access_log_settings {
     destination_arn = module.api_gateway_log_group.cloudwatch_log_group_arn
