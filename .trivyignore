@@ -1,0 +1,5 @@
+# CloudFront access logging IS configured, via standard logging v2 to CloudWatch
+# Logs (aws_cloudwatch_log_delivery* in cloudfront.tf). Trivy's check only reads
+# the legacy `logging_config` block on aws_cloudfront_distribution, so it can't
+# see the v2 delivery path. Suppress to avoid a false positive.
+AVD-AWS-0010
