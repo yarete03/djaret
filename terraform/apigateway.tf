@@ -49,14 +49,8 @@ resource "aws_api_gateway_deployment" "api_gateway_deployment" {
       aws_api_gateway_resource.proxy.id,
       aws_api_gateway_method.proxy_any.id,
       aws_api_gateway_integration.proxy_lambda.id,
-      # Hash the policy SOURCE (deterministic at plan), not the resource's .policy
-      # attribute: AWS normalizes that JSON on apply, which breaks the plan hash.
-      data.aws_iam_policy_document.api_gateway_cloudfront_only.json,
     ]))
   }
-
-  # Redeploy only after the resource policy is set, so the new policy takes effect.
-  depends_on = [aws_api_gateway_rest_api_policy.cloudfront_only]
 
   lifecycle {
     create_before_destroy = true
@@ -65,49 +59,6 @@ resource "aws_api_gateway_deployment" "api_gateway_deployment" {
 
 resource "aws_api_gateway_account" "api_gateway_account" {
   cloudwatch_role_arn = module.api_gateway_cloudwatch_role.arn
-}
-
-data "aws_ec2_managed_prefix_list" "cloudfront_origin_facing" {
-  name = "com.amazonaws.global.cloudfront.origin-facing"
-}
-
-data "aws_iam_policy_document" "api_gateway_cloudfront_only" {
-  statement {
-    sid    = "AllowInvoke"
-    effect = "Allow"
-
-    principals {
-      type        = "AWS"
-      identifiers = ["*"]
-    }
-
-    actions   = ["execute-api:Invoke"]
-    resources = ["${aws_api_gateway_rest_api.api_gateway.execution_arn}/*"]
-  }
-
-  statement {
-    sid    = "DenyNonCloudFront"
-    effect = "Deny"
-
-    principals {
-      type        = "AWS"
-      identifiers = ["*"]
-    }
-
-    actions   = ["execute-api:Invoke"]
-    resources = ["${aws_api_gateway_rest_api.api_gateway.execution_arn}/*"]
-
-    condition {
-      test     = "NotIpAddress"
-      variable = "aws:SourceIp"
-      values   = data.aws_ec2_managed_prefix_list.cloudfront_origin_facing.entries[*].cidr
-    }
-  }
-}
-
-resource "aws_api_gateway_rest_api_policy" "cloudfront_only" {
-  rest_api_id = aws_api_gateway_rest_api.api_gateway.id
-  policy      = data.aws_iam_policy_document.api_gateway_cloudfront_only.json
 }
 
 resource "aws_api_gateway_stage" "api_gateway_stage" {
