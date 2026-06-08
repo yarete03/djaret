@@ -62,10 +62,6 @@ resource "aws_api_gateway_account" "api_gateway_account" {
   cloudwatch_role_arn = module.api_gateway_cloudwatch_role.arn
 }
 
-# Restrict the API to CloudFront only: deny any source IP outside AWS's managed
-# CloudFront origin-facing prefix list. Stops direct hits on the execute-api URL
-# that would bypass CloudFront + WAF. Changing the policy requires a redeploy,
-# so its body feeds the deployment trigger above.
 data "aws_ec2_managed_prefix_list" "cloudfront_origin_facing" {
   name = "com.amazonaws.global.cloudfront.origin-facing"
 }
