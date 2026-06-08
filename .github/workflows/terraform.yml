@@ -57,6 +57,7 @@ jobs:
             -Dsonar.projectKey=djaret-terraform
             -Dsonar.sources=terraform,.github/workflows/terraform.yml
             -Dsonar.exclusions=**/.terraform/**,**/*.tfstate,**/*.tfstate.*,terraform/tfplan
+            -Dsonar.qualitygate.wait=true
 
       - name: Trivy IaC misconfig scan
         uses: aquasecurity/trivy-action@v0.36.0

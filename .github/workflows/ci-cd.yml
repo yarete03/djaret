@@ -86,6 +86,9 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.qualitygate.wait=true
 
       - name: Trivy pipeline misconfig scan
         uses: aquasecurity/trivy-action@v0.36.0
