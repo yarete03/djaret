@@ -7,14 +7,15 @@ RUN dnf install -y gcc mariadb-connector-c-devel unzip && dnf clean all
 
 # CloudWatch Application Signals — AWS's native Lambda path: the ADOT layer.
 # Container Lambdas can't attach layers, so bake layer.zip into /opt.
-RUN curl -sL https://github.com/aws-observability/aws-otel-python-instrumentation/releases/latest/download/layer.zip -o /tmp/layer.zip \
-    && mkdir -p /opt \
+ADD https://github.com/aws-observability/aws-otel-python-instrumentation/releases/latest/download/layer.zip /tmp/layer.zip
+RUN mkdir -p /opt \
     && unzip -q /tmp/layer.zip -d /opt/ \
     && chmod -R 755 /opt/ \
     && rm /tmp/layer.zip
 
 COPY requirements.txt /tmp/requirements.txt
-RUN pip install --upgrade pip && pip install -r /tmp/requirements.txt
+RUN pip install --only-binary=:all: --upgrade "pip==26.1.2" \
+    && pip install --only-binary=:all: --no-binary=mysqlclient -r /tmp/requirements.txt
 
 # ---------- runtime: slim, no compiler/headers ----------
 FROM public.ecr.aws/lambda/python:3.12
