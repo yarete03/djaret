@@ -49,9 +49,14 @@ resource "aws_api_gateway_deployment" "api_gateway_deployment" {
       aws_api_gateway_resource.proxy.id,
       aws_api_gateway_method.proxy_any.id,
       aws_api_gateway_integration.proxy_lambda.id,
-      aws_api_gateway_rest_api_policy.cloudfront_only.policy,
+      # Hash the policy SOURCE (deterministic at plan), not the resource's .policy
+      # attribute: AWS normalizes that JSON on apply, which breaks the plan hash.
+      data.aws_iam_policy_document.api_gateway_cloudfront_only.json,
     ]))
   }
+
+  # Redeploy only after the resource policy is set, so the new policy takes effect.
+  depends_on = [aws_api_gateway_rest_api_policy.cloudfront_only]
 
   lifecycle {
     create_before_destroy = true
