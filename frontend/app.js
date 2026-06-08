@@ -17,4 +17,4 @@ async function ping() {
 }
 
 btn.addEventListener("click", ping);
-ping();
+await ping();

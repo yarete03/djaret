@@ -36,7 +36,7 @@ COPY djaret_app/ ${LAMBDA_TASK_ROOT}/djaret_app/
 
 # Pre-compile bytecode at build time so cold init doesn't pay .py -> .pyc
 # compilation on first import (Django + deps).
-RUN python -m compileall -q /var/lang/lib/python3.12/site-packages ${LAMBDA_TASK_ROOT}
+RUN python -m compileall -q /var/lang/lib/python3.12/site-packages "${LAMBDA_TASK_ROOT}"
 
 ENV DJANGO_SETTINGS_MODULE=djaret.settings \
     AWS_LAMBDA_EXEC_WRAPPER=/opt/otel-instrument \
