@@ -76,7 +76,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install --only-binary=:all: --no-binary=mysqlclient -r requirements.txt
+          pip install --only-binary=:all: --no-binary=mysqlclient --require-hashes -r requirements.txt
 
       - name: Collect static files
         run: |

@@ -12,14 +12,13 @@ env:
   AWS_REGION: eu-west-1
   TF_WORKSPACE: pro
 
-permissions:
-  id-token: write
-  contents: read
-  security-events: write
-
 jobs:
   plan:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      security-events: write
     defaults:
       run:
         working-directory: terraform
@@ -113,6 +112,9 @@ jobs:
     needs: plan
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      id-token: write
+      contents: read
     defaults:
       run:
         working-directory: terraform

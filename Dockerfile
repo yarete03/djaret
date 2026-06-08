@@ -15,7 +15,7 @@ RUN mkdir -p /opt \
 
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --only-binary=:all: --upgrade "pip==26.1.2" \
-    && pip install --only-binary=:all: --no-binary=mysqlclient -r /tmp/requirements.txt
+    && pip install --only-binary=:all: --no-binary=mysqlclient --require-hashes -r /tmp/requirements.txt
 
 # ---------- runtime: slim, no compiler/headers ----------
 FROM public.ecr.aws/lambda/python:3.12
