@@ -16,3 +16,6 @@ staticfiles/
 *.tfstate
 *.tfstate.*
 crash.log
+
+# Diagram
+diagram
