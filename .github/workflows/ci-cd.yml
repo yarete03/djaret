@@ -88,6 +88,11 @@ jobs:
           coverage run --source=djaret_app manage.py test djaret_app
           coverage xml
 
+      - name: Set up Node.js for Sonar JS analysis
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+
       - name: SonarQube Cloud scan
         uses: SonarSource/sonarqube-scan-action@7006c4492b2e0ee0f816d36501671557c97f5995 # v8
         env:
@@ -95,6 +100,7 @@ jobs:
         with:
           args: >
             -Dsonar.qualitygate.wait=true
+            -Dsonar.scanner.skipNodeProvisioning=true
 
       - name: Trivy pipeline misconfig scan
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
