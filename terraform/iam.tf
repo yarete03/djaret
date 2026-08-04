@@ -10,13 +10,8 @@ data "aws_iam_policy" "rds_enhanced_monitoring" {
   name = "AmazonRDSEnhancedMonitoringRole"
 }
 
-module "github_oidc" {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-iam.git//modules/iam-oidc-provider?ref=v6.6.1"
-
-  url            = "https://token.actions.githubusercontent.com"
-  client_id_list = ["sts.amazonaws.com"]
-
-  tags = var.tags
+data "aws_iam_openid_connect_provider" "github" {
+  url = "https://token.actions.githubusercontent.com"
 }
 
 module "github_actions_role" {
@@ -33,7 +28,7 @@ module "github_actions_role" {
       Statement = [
         {
           Effect    = "Allow"
-          Principal = { Federated = module.github_oidc.arn }
+          Principal = { Federated = data.aws_iam_openid_connect_provider.github.arn }
           Action    = "sts:AssumeRoleWithWebIdentity"
           Condition = {
             StringEquals = {
