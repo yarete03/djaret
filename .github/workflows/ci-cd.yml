@@ -198,10 +198,10 @@ jobs:
       - name: Sync image tag into Terraform
         if: github.event_name == 'push'
         run: |
-          echo "image_tag = \"$SHORT_SHA\"" > terraform/image.auto.tfvars
+          sed -i "s/^image_tag *=.*/image_tag = \"$SHORT_SHA\"/" terraform/terraform.tfvars
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add terraform/image.auto.tfvars
+          git add terraform/terraform.tfvars
           git diff --cached --quiet || git commit -m "ci: set lambda image_tag to $SHORT_SHA [skip ci]"
           git push
 
