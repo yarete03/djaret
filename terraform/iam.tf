@@ -53,7 +53,7 @@ module "github_actions_role" {
     }
     lambda = {
       actions   = ["lambda:UpdateFunctionCode", "lambda:GetFunction"]
-      resources = [module.lambda.lambda_function_arn_static]
+      resources = ["*"]
     }
     s3 = {
       actions = ["s3:PutObject", "s3:GetObject", "s3:DeleteObject", "s3:ListBucket"]
