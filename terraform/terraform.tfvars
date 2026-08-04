@@ -11,4 +11,4 @@ tags = {
 }
 
 # Lambda Variables
-image_tag = "6002018"
+image_tag = "401f667"
