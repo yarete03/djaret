@@ -147,7 +147,7 @@ jobs:
         if: github.event_name == 'push'
         run: |
           aws cloudfront create-invalidation \
-          --distribution-id E2I5LTCI5TE945 \
+          --distribution-id E5UOH80FDK0ON \
           --paths "/*"
 
       - name: Build Docker image (arm64, local load)
