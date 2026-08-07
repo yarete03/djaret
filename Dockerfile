@@ -23,9 +23,10 @@ FROM public.ecr.aws/lambda/python:3.12
 # Runtime shared lib for mysqlclient's C extension (libmariadb) — no compiler,
 # no headers. Keeps the runtime image small =>
 # faster image pull on first-ever cold start and scale-out to new workers.
-# dnf update first: the base image lags the amzn2023 repos, so patched OS
-# packages (rpm, glib2, gawk, ...) only land if we upgrade — else Trivy gates on them.
-RUN dnf -y update && dnf install -y mariadb-connector-c shadow-utils && dnf clean all \
+# dnf update first: the base image pins AL2023 to an old releasever snapshot, so
+# plain `dnf update` can't reach patched packages (rpm, glib2, gawk, ...).
+# --releasever=latest moves to the newest AL2023 snapshot — else Trivy gates on them.
+RUN dnf -y --releasever=latest update && dnf install -y mariadb-connector-c shadow-utils && dnf clean all \
     && /usr/sbin/useradd --uid 1000 --create-home --shell /sbin/nologin djaret
 
 # Bring over the ADOT layer and the installed site-packages from the builder.
