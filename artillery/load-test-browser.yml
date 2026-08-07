@@ -1,0 +1,36 @@
+config:
+  target: "https://www.yaret.cloud"
+  engines:
+    playwright:
+      aggregateByName: true
+      trace: true
+      launchOptions:
+        headless: true
+        args:
+          - "--no-sandbox"
+          - "--disable-dev-shm-usage"
+      showAllPageMetrics: true
+  processor: "./flows.js"
+  phases:
+    - name: warmup
+      duration: 60
+      arrivalRate: 1
+    - name: ramp
+      duration: 120
+      arrivalRate: 1
+      rampTo: 4
+    - name: sustained
+      duration: 180
+      arrivalRate: 4
+    - name: spike
+      duration: 60
+      arrivalRate: 8
+  ensure:
+    thresholds:
+      - "browser.page.LCP.browser-user.p95": 2500
+      - "browser.step.initial_api_render.p95": 3000
+
+scenarios:
+  - name: "browser-user"
+    engine: playwright
+    testFunction: "pingFlow"
