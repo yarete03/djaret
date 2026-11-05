@@ -35,6 +35,28 @@ module "rds" {
       name         = "sql_mode"
       value        = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
       apply_method = "immediate"
+    },
+    # Datadog Database Monitoring. All four are static: they only take effect
+    # after the instance is rebooted.
+    {
+      name         = "performance_schema"
+      value        = "1"
+      apply_method = "pending-reboot"
+    },
+    {
+      name         = "max_digest_length"
+      value        = "4096"
+      apply_method = "pending-reboot"
+    },
+    {
+      name         = "performance_schema_max_digest_length"
+      value        = "4096"
+      apply_method = "pending-reboot"
+    },
+    {
+      name         = "performance_schema_max_sql_text_length"
+      value        = "4096"
+      apply_method = "pending-reboot"
     }
   ]
 
