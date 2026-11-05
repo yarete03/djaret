@@ -29,6 +29,12 @@ FROM public.ecr.aws/lambda/python:3.12
 RUN dnf -y --releasever=latest update && dnf install -y mariadb-connector-c shadow-utils && dnf clean all \
     && /usr/sbin/useradd --uid 1000 --create-home --shell /sbin/nologin djaret
 
+# aws-lambda-rie is the local Runtime Interface Emulator; the Lambda service never
+# runs it. AWS lags rebuilding it against patched Go stdlib, so Trivy keeps gating
+# on it. Drop it. For local testing, mount the RIE instead:
+#   docker run -v ~/.aws-lambda-rie:/aws-lambda --entrypoint /aws-lambda/aws-lambda-rie ...
+RUN rm -f /usr/local/bin/aws-lambda-rie
+
 # Bring over the ADOT layer and the installed site-packages from the builder.
 COPY --from=builder /opt /opt
 RUN rm -rf /var/lang/lib/python3.12/site-packages
